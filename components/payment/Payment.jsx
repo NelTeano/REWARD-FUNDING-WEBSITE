@@ -1,14 +1,20 @@
 import React from 'react'
-
+import Link from 'next/link';
 
 
 export default function Payment() {
 
-    console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_SECRET_KEY);
+    
 
     return (
-        <div>
-            asd
-        </div>
+        <>
+            <Link href='https://buy.stripe.com/test_28o03G8ZV63XamQfYY'>
+                <button
+                    style={{width: '300px', height: '70px', padding: '20px', borderRadius: '10px', backgroundColor: '#0074d4', color: 'white'}}
+                >
+                    Buy 
+                </button>
+            </Link>
+        </>
     )
 }
