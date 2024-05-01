@@ -2,7 +2,20 @@
 import React from 'react'
 import Payment from '../../../components/payment/Payment'
 
-export default function page() {
+import { useAuth,  SignOutButton} from "@clerk/nextjs";
+
+export default function Page() {
+
+
+    const { isLoaded, userId, sessionId, getToken, signOut } = useAuth();
+
+    if (!isLoaded || !userId) {
+        return null;
+    }
+
+
+
+
     return (
         <>
             <div style={{
@@ -15,7 +28,8 @@ export default function page() {
                 backgroundColor: 'white',
                 gap: '50px'
             }}>
-                <p>Hello Click the button below to Buy Bracelets</p>
+                <p>Hello {userId}  your current active session is {sessionId} Click the button below to Buy Bracelets</p>
+                <SignOutButton />
                 <img 
                     src='https://i.ebayimg.com/images/g/hy4AAOSwFDliROQL/s-l1200.webp'
                     height={'400px'} 
