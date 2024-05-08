@@ -23,11 +23,14 @@ export default function Page() {
 
     const { isLoaded, userId, sessionId, getToken, signOut } = useAuth();
 
+    const router = useRouter();
 
     const [users, setUsers] = useState(['']);
 
     useEffect(() => {
-        
+        if (!isLoaded || !userId) {
+            router.push('/');
+        } else {
             const getAllUsers = async () => {
                 try {
                     const getUsers = await axios.get('https://deploy-express-vercel-ashy.vercel.app/api/users');
@@ -36,11 +39,10 @@ export default function Page() {
                 } catch (error) {
                     console.log("Fetch Data Error", error)
                 }
-            
+            }
             getAllUsers();
         }
-    }, [isLoaded, userId,])
-    
+    }, [isLoaded, userId, router])
 
     
 
