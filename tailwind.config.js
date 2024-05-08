@@ -26,6 +26,11 @@ module.exports = {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
+
+    fontSize: {
+      sm: '14px',
+      md: '18px',
+    },
     // height: {
     //   '128': '32rem',
     // },
