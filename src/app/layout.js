@@ -1,6 +1,7 @@
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
+
 // AUTH PROVIDER
 import { ClerkProvider } from '@clerk/nextjs'
 
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
       
     >
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
