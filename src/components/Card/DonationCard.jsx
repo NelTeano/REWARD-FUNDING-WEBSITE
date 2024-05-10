@@ -1,7 +1,7 @@
 import DemoPicture from '../../../public/assets/DemoPic.png'
 import Image from 'next/image'
 
-import { DM_Sans } from 'next/font/google'
+
 
 
 // ICONS 

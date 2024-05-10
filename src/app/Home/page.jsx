@@ -4,12 +4,12 @@ import axios from 'axios';
 
 // COMPONENTS
 import { useAuth,  SignOutButton} from "@clerk/nextjs";
-import Payment from '../../components/payment/Payment';
+import Payment from '@/components/payment/Payment';
 import Image from 'next/image';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer'
-import Card from '../../components/Card/Card';
-
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer'
+import DonationCard from '@/components/Card/DonationCard';
+import ProductCard from '@/components/Card/ProductCard';
 
 // IMAGES
 import {
@@ -22,6 +22,8 @@ import {
     Img7, 
     Img8,
 } from '../../../public/assets/Companies/Companies'
+
+import BoardImage from '../../../public/assets/BoardImage.png'
 
 // ICONS 
 import { BeakerIcon } from '@heroicons/react/24/solid'
@@ -70,7 +72,7 @@ export default function Page() {
         <>
         {users && (
             <div className='flex flex-col w-full relative h-[4000px]'>
-                    <div className='flex flex-col items-center justify-center w-full h-[1000px] bg-cyan'>
+                    <div className='flex flex-col items-center justify-center w-full h-[1300px] bg-cyan'>
                             <p className='text-center'>Happiness comes from <br /> your action.</p>
                             <p>Be a part of the breakthrough and make someone’s dream come true.</p>
                             <div className='flex flex-row gap-10 '>
@@ -78,6 +80,7 @@ export default function Page() {
                                 <button> Watch video</button>
                             </div>
                     </div>
+
                     <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center px-[187px] py-[80px]'>
                         <div className='flex flex-col justify-center items-center gap-8'>
                             <div className='flex inline gap-2 text-[32px]'>
@@ -103,15 +106,102 @@ export default function Page() {
                                 ))}
                             </div>
                             <div className='flex flex-row flex-wrap w-[1067px] gap-10'>
-                                {[0,1,2,3,4,5,6,7,8,9].map((card, index) => (
-                                    <Card key={index}/>
+                                {[1,2,3,4,5,6,].map((card, index) => (
+                                    <DonationCard key={index}/>
                                 ))}
                             </div>
                         </div>
                     </div>  
 
 
-                    <div className='flex flex-col items-center justify-center w-full h-[1000px] bg-lightGray gap-[90px]'>
+
+                    <div className='flex flex-row items-center justify-center w-full h-[1000px] bg-lightGray gap-[87px]'>
+                        <div className='flex flex-col gap-12'>
+                            <div className='flex flex-col gap-1'>
+                                <p className='text-gray text-sm font-medium'>
+                                    HUMANITARIAN MISSION
+                                </p>
+                                <h1 className='text-black text-lg font-bold'>
+                                    Help the Affected by <br />
+                                    <span className='text-cyan'>Disasters, Shortages,</span> and <br />
+                                    <span className='text-cyan'>Emergency Relief</span>.
+                                </h1>
+                            </div>
+                            <div className='flex flex-row gap-10 text-md text-black font-medium'>
+                                <div className='flex flex-col gap-5'>
+                                    <p>
+                                        <span className='text-cyan'>22,690</span> &nbsp;  
+                                        Donations have been <br /> 
+                                        verified and still active.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>6,450</span>  &nbsp; 
+                                        Donations have been <br />
+                                        distributed to disaster- <br />
+                                        affected areas.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>1.4 Billion</span>  &nbsp; 
+                                        total funds raised <br />
+                                        so far.
+                                    </p>
+                                </div>
+                                <div className='flex flex-col gap-5'>
+                                    <p>
+                                        <span className='text-cyan'>10,517</span>  &nbsp; 
+                                        donations have been <br />
+                                        distributed to the needy.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>5,058</span>  &nbsp; 
+                                        donations were <br />
+                                        distributed to social foundations <br />
+                                        and orphanages.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>4,803</span>  &nbsp; 
+                                        donations have been <br />
+                                        distributed to people in <br />
+                                        emergency situations.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <Image 
+                            src={BoardImage}
+                            priority={true}
+                            width="0"
+                            height="0"
+                            className='h-[454px] w-[454px] relative left-[100px] top-[120px]'
+                            alt='product image'
+                        />
+                    </div>
+
+
+                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center gap-12 px-[187px] py-[80px]'>
+                        <div className='flex flex-col gap-3'>
+                            <p className='text-gray text-sm text-left'>OUR PRODUCTS</p>
+                            <span className='text-lg text-left font-bold leading-5'>
+                                E-commerce platform for &nbsp; 
+                                <span className='text-cyan'>
+                                    Organizations &nbsp;
+                                </span>
+                                and &nbsp;
+                                <span className='text-cyan'>
+                                    Institutions &nbsp;
+                                </span>
+                                to help them raise more money
+                            </span>
+                        </div>
+                        <div className='flex flex-row flex-wrap justify-center items-center w-[1467px] gap-10'>
+                            {[1, 2, 3,].map((image, index) => (
+                                        <ProductCard key={index}/>
+                                    ))}
+                            
+                        </div>
+                    </div>
+
+                    <div className='flex flex-col items-center justify-center w-full h-[400px] pb-[100px] bg-lightGray gap-[90px]'>
                         <div className='flex flex-col gap-3'>
                             <p className='text-gray text-sm text-left'>OUR PARTNERS</p>
                             <span className='text-lg text-left font-bold leading-5'>
@@ -154,9 +244,6 @@ export default function Page() {
 
 
 
-                    <div className='flex flex-col w-full h-[1000px] bg-gray'>
-                            
-                    </div>
 
 
 
@@ -167,9 +254,7 @@ export default function Page() {
 
 
 
-
-
-                    <div className='flex flex-col w-full h-[1000px] bg-white'>
+                    {/* <div className='flex flex-col w-full h-[1000px] bg-white'>
                         <p>Hello {users[0].name} and email {users[0].email} user id : {userId}  your current active session is {sessionId} Click the button below to Buy Bracelets</p>
 
                         <SignOutButton >
@@ -187,7 +272,9 @@ export default function Page() {
                         <div>
                             <Payment />
                         </div>
-                    </div>
+                    </div> */}
+
+
                 </div>
             )}
         </>
