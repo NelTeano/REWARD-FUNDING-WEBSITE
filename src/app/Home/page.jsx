@@ -60,7 +60,7 @@ export default function Page() {
             }
 
             getAllUsers();
-    }, [isLoaded, userId])
+    }, [isLoaded, userId]);
 
     
 
