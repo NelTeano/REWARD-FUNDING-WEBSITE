@@ -22,10 +22,14 @@ import {
     Img8,
 } from '../../../public/assets/Companies/Companies'
 
+import OrgImage from '../../../public/assets/CharityOrg.jpg'
 import BoardImage from '../../../public/assets/BoardImage.png'
 
 // ICONS 
-import { ChevronRightIcon } from '@heroicons/react/24/solid'
+import { 
+    ChevronRightIcon,
+    BanknotesIcon
+} from '@heroicons/react/24/solid'
 
 
 const CompaniesImages = [
@@ -72,7 +76,7 @@ export default function Page() {
     return (
         <>
         {users && (
-            <div className='flex flex-col w-full relative h-[5600px]'>
+            <div className='flex flex-col w-full relative h-[6000px] bg-lightGray'>
                     <div 
                         className='flex flex-col relative items-center justify-center w-full h-[90vh] text-center text-white gap-5 bg-black'
                     >   
@@ -89,7 +93,7 @@ export default function Page() {
                         </div>
                     </div>
 
-                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center px-[187px] py-[80px] gap-8'>
+                    <div className='flex flex-col w-full h-auto bg-white justify-center items-center px-[187px] py-[80px] gap-8'>
                         <div className='flex flex-col justify-center items-center gap-8'>
                             <div className='flex inline gap-2 text-[32px]'>
                                 <h1 className='text-black'>
@@ -192,7 +196,7 @@ export default function Page() {
                     </div>
 
 
-                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center gap-12 px-[187px] py-[80px]'>
+                    <div className='flex flex-col w-full h-auto bg-white justify-center items-center gap-12 px-[187px] py-[80px]'>
                         <div className='flex flex-col gap-3'>
                             <p className='text-gray text-sm text-left'>OUR PRODUCTS</p>
                             <span className='text-lg text-left font-bold leading-5'>
@@ -221,7 +225,7 @@ export default function Page() {
                         </Link>
                     </div>
 
-                    <div className='flex flex-col items-center justify-center w-full h-[1000px] pb-[100px] bg-lightGray gap-[90px]'>
+                    <div className='flex flex-col items-center justify-center w-full h-[500px] bg-lightGray gap-[90px]'>
                         <div className='flex flex-col gap-3'>
                             <p className='text-gray text-sm text-left'>OUR PARTNERS</p>
                             <span className='text-lg text-left font-bold leading-5'>
@@ -261,9 +265,36 @@ export default function Page() {
                     </div>
 
 
+                    <div className='flex items-center justify-center w-full h-[500px] bg-lightGray'>
+                        <div className='flex flex-row w-[1000px] h-[400px] bg-white shadow-xl'>
+                            <div className='flex flex-col items-center justify-center w-[50%]'>
+                                <div className='flex flex-col  gap-4 w-[300px]'>
+                                    <h1 className='text-black font-bold text-lg leading-8'>Organization Fundraise for a <span className='text-cyan'>great cause</span></h1>
+                                    <p>Group of organization aims to support poverty, environment and animals <br />
+                                        with any amount of your money can help and support these organizations goal.
+                                    </p>
+                                    <Link 
+                                        className='flex items-center justify-center rounded-lg w-[166px] h-[55px] bg-black text-white gap-2'
+                                        href={'/Organizations'}
+                                    >
+                                        Donate now <BanknotesIcon className='size-6 text-blue-500' />
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className='bg-white w-[50%]'>
+                                <Image 
+                                    src={OrgImage}
+                                    priority={true}
+                                    width="0"
+                                    height="0"
+                                    className='h-full w-full relative'
+                                    alt='product image'
+                                />
+                            </div>  
+                        </div>
+                    </div>
 
-
-
+                            
 
 
 
