@@ -6,10 +6,9 @@ import axios from 'axios';
 import { useAuth,  SignOutButton} from "@clerk/nextjs";
 import Payment from '@/components/payment/Payment';
 import Image from 'next/image';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer'
 import DonationCard from '@/components/Card/DonationCard';
 import ProductCard from '@/components/Card/ProductCard';
+import Link from 'next/link';
 
 // IMAGES
 import {
@@ -26,7 +25,7 @@ import {
 import BoardImage from '../../../public/assets/BoardImage.png'
 
 // ICONS 
-import { BeakerIcon } from '@heroicons/react/24/solid'
+import { ChevronRightIcon } from '@heroicons/react/24/solid'
 
 
 const CompaniesImages = [
@@ -39,6 +38,7 @@ const CompaniesImages = [
     { src: Img7, width: '128.8px', height: '45.67px' },
     { src: Img8, width: '116.01px', height: '86.78px' }
 ];
+
 
 
 export default function Page() {
@@ -68,20 +68,28 @@ export default function Page() {
     // console.log("user: ", users[0].email)
     // <BeakerIcon className="size-6 text-blue-500" /> 
 
+
     return (
         <>
         {users && (
-            <div className='flex flex-col w-full relative h-[4000px]'>
-                    <div className='flex flex-col items-center justify-center w-full h-[1300px] bg-cyan'>
-                            <p className='text-center'>Happiness comes from <br /> your action.</p>
-                            <p>Be a part of the breakthrough and make someone’s dream come true.</p>
-                            <div className='flex flex-row gap-10 '>
-                                <button>Donate now</button>
-                                <button> Watch video</button>
-                            </div>
+            <div className='flex flex-col w-full relative h-[5600px]'>
+                    <div 
+                        className='flex flex-col relative items-center justify-center w-full h-[90vh] text-center text-white gap-5 bg-black'
+                    >   
+                        <span className='text-xxl leading-[70px]'>
+                            <span className='text-cyan'>Happiness</span> comes from <br /> 
+                            <span className='text-cyan'>your action.</span>
+                        </span>
+                        <p className='text-lsm'>
+                            Be a part of the breakthrough and make someone&apos;s dream come true.
+                        </p>
+                        <div className='flex flex-row gap-4 font-medium mt-5'>
+                            <button className='rounded-full w-[166px] h-[55px] bg-cyan'>Donate now</button>
+                            <button className='rounded-full w-[166px] h-[55px] bg-transparent border-white border'>About us</button>
+                        </div>
                     </div>
 
-                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center px-[187px] py-[80px]'>
+                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center px-[187px] py-[80px] gap-8'>
                         <div className='flex flex-col justify-center items-center gap-8'>
                             <div className='flex inline gap-2 text-[32px]'>
                                 <h1 className='text-black'>
@@ -106,11 +114,17 @@ export default function Page() {
                                 ))}
                             </div>
                             <div className='flex flex-row flex-wrap w-[1067px] gap-10'>
-                                {[1,2,3,4,5,6,].map((card, index) => (
+                                {[1,2,3,4,5,6,7,8,9].map((card, index) => (
                                     <DonationCard key={index}/>
                                 ))}
                             </div>
                         </div>
+                        <Link
+                            className='flex inline gap-4 hover:ml-4 hover:text-cyan ease-in duration-200'
+                            href={'/donations'}
+                        >
+                            See more <ChevronRightIcon className='size-6 text-blue-500' />
+                        </Link>
                     </div>  
 
 
@@ -194,14 +208,20 @@ export default function Page() {
                             </span>
                         </div>
                         <div className='flex flex-row flex-wrap justify-center items-center w-[1467px] gap-10'>
-                            {[1, 2, 3,].map((image, index) => (
+                            {[1, 2, 3, 4, 5, 6, 7, 8,].map((image, index) => (
                                         <ProductCard key={index}/>
                                     ))}
                             
                         </div>
+                        <Link
+                            className='flex inline gap-4 hover:ml-4 hover:text-cyan ease-in duration-200'
+                            href={'/products'}
+                        >
+                            See more <ChevronRightIcon className='size-6 text-blue-500' />
+                        </Link>
                     </div>
 
-                    <div className='flex flex-col items-center justify-center w-full h-[400px] pb-[100px] bg-lightGray gap-[90px]'>
+                    <div className='flex flex-col items-center justify-center w-full h-[1000px] pb-[100px] bg-lightGray gap-[90px]'>
                         <div className='flex flex-col gap-3'>
                             <p className='text-gray text-sm text-left'>OUR PARTNERS</p>
                             <span className='text-lg text-left font-bold leading-5'>

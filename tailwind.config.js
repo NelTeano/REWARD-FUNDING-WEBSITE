@@ -31,7 +31,8 @@ module.exports = {
       sm: '14px',
       lsm: '16px',
       md: '18px',
-      lg: '32px'
+      lg: '32px',
+      xxl: '60px',
     },
     // height: {
     //   '128': '32rem',

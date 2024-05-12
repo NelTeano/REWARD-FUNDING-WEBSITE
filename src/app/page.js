@@ -1,120 +1,304 @@
-import Image from "next/image";
-import {  SignOutButton, SignInButton} from "@clerk/nextjs";
+'use client'
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-          <SignInButton >
-                            <button>Sign in</button>
-          </SignInButton>
-          <SignOutButton >
+// COMPONENTS
+import { useAuth,  SignOutButton} from "@clerk/nextjs";
+import Payment from '@/components/payment/Payment';
+import Image from 'next/image';
+import DonationCard from '@/components/Card/DonationCard';
+import ProductCard from '@/components/Card/ProductCard';
+import Link from 'next/link';
+
+// IMAGES
+import {
+    Img1,
+    Img2,
+    Img3, 
+    Img4, 
+    Img5, 
+    Img6, 
+    Img7, 
+    Img8,
+} from '../../public/assets/Companies/Companies'
+
+import BoardImage from '../../public/assets/BoardImage.png'
+
+// ICONS 
+import { ChevronRightIcon } from '@heroicons/react/24/solid'
+
+
+const CompaniesImages = [
+    { src: Img1, width: '153.71px', height: '32.88px' },
+    { src: Img2, width: '178.12px', height: '106.87px' },
+    { src: Img3, width: '196.39px', height: '60.29px' },
+    { src: Img4, width: '135.19px', height: '47.5px' },
+    { src: Img5, width: '155.29px', height: '62.11px' },
+    { src: Img6, width: '139.76px', height: '40.19px' },
+    { src: Img7, width: '128.8px', height: '45.67px' },
+    { src: Img8, width: '116.01px', height: '86.78px' }
+];
+
+
+
+export default function Page() {
+
+    const { isLoaded, userId, sessionId, getToken, signOut } = useAuth();
+
+    const [users, setUsers] = useState(['']);
+
+    useEffect(() => {
+        
+            const getAllUsers = async () => {
+                try {
+                    const getUsers = await axios.get('https://deploy-express-vercel-ashy.vercel.app/api/users');
+                    setUsers(getUsers.data);
+                    console.log(getUsers.data);
+                } catch (error) {
+                    console.log("Fetch Data Error", error)
+                }
+            }
+
+            getAllUsers();
+    }, [isLoaded, userId])
+
+    
+
+    // console.log("user: ", users[0].name);
+    // console.log("user: ", users[0].email)
+    // <BeakerIcon className="size-6 text-blue-500" /> 
+
+
+    return (
+        <>
+        {users && (
+            <div className='flex flex-col w-full relative h-[5600px]'>
+                    <div 
+                        className='flex flex-col relative items-center justify-center w-full h-[90vh] text-center text-white gap-5 bg-black'
+                    >   
+                        <span className='text-xxl leading-[70px]'>
+                            <span className='text-cyan'>Happiness</span> comes from <br /> 
+                            <span className='text-cyan'>your action.</span>
+                        </span>
+                        <p className='text-lsm'>
+                            Be a part of the breakthrough and make someone&apos;s dream come true.
+                        </p>
+                        <div className='flex flex-row gap-4 font-medium mt-5'>
+                            <button className='rounded-full w-[166px] h-[55px] bg-cyan'>Donate now</button>
+                            <button className='rounded-full w-[166px] h-[55px] bg-transparent border-white border'>About us</button>
+                        </div>
+                    </div>
+
+                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center px-[187px] py-[80px] gap-8'>
+                        <div className='flex flex-col justify-center items-center gap-8'>
+                            <div className='flex inline gap-2 text-[32px]'>
+                                <h1 className='text-black'>
+                                    Open
+                                </h1>
+                                <h1 className='text-cyan '>
+                                    donations
+                                </h1>
+                            </div>
+                            <div className='flex flex-row gap-2'>
+                                <button className='border text-[16px] text-white border-cyan rounded-lg w-[50px] h-[38px] bg-cyan'>
+                                    All
+                                </button>
+
+                                {["Homeless", "Food Crisis", "Disaster", "Education"].map((categories, index) => (
+                                    <button 
+                                        className='border text-[16px] text-cyan border-cyan rounded-lg w-[93px] h-[38px] hover:text-white hover:bg-cyan'
+                                        key={index}
+                                    >
+                                        {categories}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className='flex flex-row flex-wrap w-[1067px] gap-10'>
+                                {[1,2,3,4,5,6,7,8,9].map((card, index) => (
+                                    <DonationCard key={index}/>
+                                ))}
+                            </div>
+                        </div>
+                        <Link
+                            className='flex inline gap-4 hover:ml-4 hover:text-cyan ease-in duration-200'
+                            href={'/donations'}
+                        >
+                            See more <ChevronRightIcon className='size-6 text-blue-500' />
+                        </Link>
+                    </div>  
+
+
+
+                    <div className='flex flex-row items-center justify-center w-full h-[1000px] bg-lightGray gap-[87px]'>
+                        <div className='flex flex-col gap-12'>
+                            <div className='flex flex-col gap-1'>
+                                <p className='text-gray text-sm font-medium'>
+                                    HUMANITARIAN MISSION
+                                </p>
+                                <h1 className='text-black text-lg font-bold'>
+                                    Help the Affected by <br />
+                                    <span className='text-cyan'>Disasters, Shortages,</span> and <br />
+                                    <span className='text-cyan'>Emergency Relief</span>.
+                                </h1>
+                            </div>
+                            <div className='flex flex-row gap-10 text-md text-black font-medium'>
+                                <div className='flex flex-col gap-5'>
+                                    <p>
+                                        <span className='text-cyan'>22,690</span> &nbsp;  
+                                        Donations have been <br /> 
+                                        verified and still active.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>6,450</span>  &nbsp; 
+                                        Donations have been <br />
+                                        distributed to disaster- <br />
+                                        affected areas.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>1.4 Billion</span>  &nbsp; 
+                                        total funds raised <br />
+                                        so far.
+                                    </p>
+                                </div>
+                                <div className='flex flex-col gap-5'>
+                                    <p>
+                                        <span className='text-cyan'>10,517</span>  &nbsp; 
+                                        donations have been <br />
+                                        distributed to the needy.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>5,058</span>  &nbsp; 
+                                        donations were <br />
+                                        distributed to social foundations <br />
+                                        and orphanages.
+                                    </p>
+                                    <p>
+                                        <span className='text-cyan'>4,803</span>  &nbsp; 
+                                        donations have been <br />
+                                        distributed to people in <br />
+                                        emergency situations.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <Image 
+                            src={BoardImage}
+                            priority={true}
+                            width="0"
+                            height="0"
+                            className='h-[454px] w-[454px] relative left-[100px] top-[120px]'
+                            alt='product image'
+                        />
+                    </div>
+
+
+                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center gap-12 px-[187px] py-[80px]'>
+                        <div className='flex flex-col gap-3'>
+                            <p className='text-gray text-sm text-left'>OUR PRODUCTS</p>
+                            <span className='text-lg text-left font-bold leading-5'>
+                                E-commerce platform for &nbsp; 
+                                <span className='text-cyan'>
+                                    Organizations &nbsp;
+                                </span>
+                                and &nbsp;
+                                <span className='text-cyan'>
+                                    Institutions &nbsp;
+                                </span>
+                                to help them raise more money
+                            </span>
+                        </div>
+                        <div className='flex flex-row flex-wrap justify-center items-center w-[1467px] gap-10'>
+                            {[1, 2, 3, 4, 5, 6, 7, 8,].map((image, index) => (
+                                        <ProductCard key={index}/>
+                                    ))}
+                            
+                        </div>
+                        <Link
+                            className='flex inline gap-4 hover:ml-4 hover:text-cyan ease-in duration-200'
+                            href={'/products'}
+                        >
+                            See more <ChevronRightIcon className='size-6 text-blue-500' />
+                        </Link>
+                    </div>
+
+                    <div className='flex flex-col items-center justify-center w-full h-[1000px] pb-[100px] bg-lightGray gap-[90px]'>
+                        <div className='flex flex-col gap-3'>
+                            <p className='text-gray text-sm text-left'>OUR PARTNERS</p>
+                            <span className='text-lg text-left font-bold leading-5'>
+                                More than 50 &nbsp; 
+                                <span className='text-cyan'>
+                                    Companies &nbsp;
+                                </span>
+                                and &nbsp;
+                                <span className='text-cyan'>
+                                    Institutions &nbsp;
+                                </span>
+                                that trust us over the years
+                            </span>
+                        </div>
+                        <div className='flex flex-row items-center justify-center gap-3'>
+                            <div className='flex flex-row flex-wrap w-[879.12px] gap-3'>
+                                {CompaniesImages.map((image, index) => (
+                                    <div 
+                                        className='flex items-center justify-center h-[94.09px] w-[210.09px] bg-white rounded-md shadow-lg hover:scale-125 hover:cursor-pointer ease-in duration-150'
+                                        key={index}
+                                    >
+                                        <Image 
+                                            src={image.src}
+                                            priority={true}
+                                            width="0"
+                                            height="0"
+                                            style={{width: image.width, height: image.height}}
+                                            alt='product image'
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            <div className='flex items-center justify-center text-lsm h-[204px] w-[160px] bg-white'>
+                                <p>and 42 mores</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {/* <div className='flex flex-col w-full h-[1000px] bg-white'>
+                        <p>Hello {users[0].name} and email {users[0].email} user id : {userId}  your current active session is {sessionId} Click the button below to Buy Bracelets</p>
+
+                        <SignOutButton >
                             <button>Sign out</button>
-          </SignOutButton>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+                        </SignOutButton>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+                        <Image 
+                            src={'https://files.stripe.com/links/MDB8YWNjdF8xUEI3M25QNnRDSWVidmp5fGZsX3Rlc3RfQlhJVXgxSXY0NURkMDBxd0Y3dWNxTTk200Cbzl7q2S'}
+                            priority={true}
+                            width="0"
+                            height="0"
+                            className='h-200 w-200'
+                            alt='product image'
+                        />
+                        <div>
+                            <Payment />
+                        </div>
+                    </div> */}
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+                </div>
+            )}
+        </>
+        
+    )
 }
+
