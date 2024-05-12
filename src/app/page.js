@@ -85,7 +85,9 @@ export default function Page() {
                         </p>
                         <div className='flex flex-row gap-4 font-medium mt-5'>
                             <button className='rounded-full w-[166px] h-[55px] bg-cyan'>Donate now</button>
-                            <button className='rounded-full w-[166px] h-[55px] bg-transparent border-white border'>About us</button>
+                            <SignOutButton>
+                                <button className='rounded-full w-[166px] h-[55px] bg-transparent border-white border'>About us</button>
+                            </SignOutButton>
                         </div>
                     </div>
 
