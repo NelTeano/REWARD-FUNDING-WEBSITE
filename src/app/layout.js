@@ -9,6 +9,10 @@ import Footer from '@/components/Footer/Footer'
 
 // AUTH PROVIDER
 import { ClerkProvider } from '@clerk/nextjs'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import { ThemeProvider } from '@mui/material/styles';
+
+import theme from "@/theme";
 
 const inter = DM_Sans({ subsets: ["latin"] });
 
@@ -25,9 +29,13 @@ export default function RootLayout({ children }) {
     >
       <html lang="en">
         <body className={inter.className}>
-          <Header />
-            {children}
-          <Footer />
+          <AppRouterCacheProvider options={{ key: 'css' }}>
+            <ThemeProvider theme={theme} >
+              <Header />
+                {children}
+              <Footer />
+            </ThemeProvider>
+          </AppRouterCacheProvider>
         </body>
       </html>
     </ClerkProvider>
