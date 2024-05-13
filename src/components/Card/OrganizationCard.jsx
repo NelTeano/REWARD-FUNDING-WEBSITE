@@ -53,7 +53,7 @@ export default function OrganizationCard({product}) {
             </div>
             <Link 
                 href={product.metadata.link}
-                className='flex justify-center items-center bg-transparent py-2 rounded-md text-cyan border border-cyan hover:bg-cyan hover:text-white ease-in duration-200'>
+                className='flex justify-center items-center bg-black py-2 rounded-md text-white hover:bg-cyan hover:text-white ease-in duration-200'>
                 Donate now
             </Link>
 

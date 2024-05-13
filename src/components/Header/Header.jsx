@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 
 import { HomeModernIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link';
 
 
 
@@ -48,6 +49,25 @@ export default function Header() {
         };
     }, []);
     
+
+    const HeaderRoutes = [
+        {
+            name: 'About',
+            link: '/about',
+        },
+        {
+            name: 'Charity',
+            link: '/charity',
+        },
+        {
+            name: 'Shop',
+            link: '/shop',
+        },
+        {
+            name: 'Organizations',
+            link: '/organizations',
+        },
+    ]
     
 
     return (
@@ -60,18 +80,26 @@ export default function Header() {
                     boxShadow: headerColor.shadow
                 }}
             >
-                <div className='flex inline items-center gap-1'>
-                    <HomeModernIcon className="size-7 text-blue-500"/>
-                    <span>
-                        Rew 
-                        <span className='font-bold'>Fund</span>
-                    </span>
-                </div>
+                <Link
+                    href={'/'}
+                >
+                    <div className='flex inline items-center gap-1'>
+                        <HomeModernIcon className="size-7 text-blue-500"/>
+                        <span>
+                            Rew 
+                            <span className='font-bold'>Fund</span>
+                        </span>
+                    </div>
+                </Link>
                 <div className='flex flex-row gap-10'>
-                    <p>About</p>
-                    <p>Charity</p>
-                    <p>Shop</p>
-                    <p>Organizations</p>
+                    {HeaderRoutes.map((header, index) => (
+                        <Link
+                            key={index}
+                            href={header.link}
+                        >
+                            <p>{header.name}</p>
+                        </Link>
+                    ))}
                 </div>
             </nav>
         </React.Fragment>
