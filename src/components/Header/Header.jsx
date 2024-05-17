@@ -73,7 +73,7 @@ export default function Header() {
     return (
         <React.Fragment>
             <nav 
-                className='flex flex-row fixed top-0 justify-around items-center h-20 w-full bg-transparent text-white z-50 ease-in duration-200'
+                className='hidden flex flex-row fixed top-0 justify-around items-center h-20 w-full bg-transparent text-white z-50 ease-in duration-200'
                 style={{
                     backgroundColor: headerColor.bgColor,
                     color: headerColor.color,

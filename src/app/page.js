@@ -72,7 +72,7 @@ export default function Page() {
     return (
         <>
         {users && (
-            <div className='flex flex-col w-full relative h-[5600px]'>
+            <div className='flex flex-col  w-full relative h-[5600px] sm:h-auto'>
                     <div 
                         className='flex flex-col relative items-center justify-center w-full h-[90vh] text-center text-white gap-5 bg-black'
                     >   
@@ -101,7 +101,7 @@ export default function Page() {
                                     donations
                                 </h1>
                             </div>
-                            <div className='flex flex-row gap-2'>
+                            <div className='flex lg:flex-row lg:w-[500px] gap-2 sm:flex-wrap sm:w-[300px] sm:items-center sm:justify-center'>
                                 <button className='border text-[16px] text-white border-cyan rounded-lg w-[50px] h-[38px] bg-cyan'>
                                     All
                                 </button>
@@ -115,26 +115,25 @@ export default function Page() {
                                     </button>
                                 ))}
                             </div>
-                            <div className='flex flex-row flex-wrap w-[1067px] gap-10'>
+                            <div className='flex lg:flex-row flex-wrap lg:w-[1067px] gap-10 sm:flex-col sm:items-center sm:justify-center sm:w-full'>
                                 {[1,2,3,4,5,6,7,8,9].map((card, index) => (
                                     <DonationCard key={index}/>
                                 ))}
                             </div>
                         </div>
                         <Link
-                            className='flex inline gap-4 hover:ml-4 hover:text-cyan ease-in duration-200'
+                            className='flex inline gap-2 hover:ml-4 hover:text-cyan ease-in duration-200 sm:w-[300px] sm:items-center sm:justify-center'
                             href={'/donations'}
                         >
-                            See more <ChevronRightIcon className='size-6 text-blue-500' />
+                            <span>See more</span> <ChevronRightIcon className='size-6 text-blue-500' />
                         </Link>
                     </div>  
 
 
-
-                    <div className='flex flex-row items-center justify-center w-full h-[1000px] bg-lightGray gap-[87px]'>
-                        <div className='flex flex-col gap-12'>
-                            <div className='flex flex-col gap-1'>
-                                <p className='text-gray text-sm font-medium'>
+                    <div className='flex lg:flex-row lg:items-center lg:justify-center lg:w-full lg:h-[1000px] bg-lightGray gap-[87px] sm:flex-col sm:h-[700px] sm:py-10'>
+                        <div className='flex flex-col gzap-12 z-10'>
+                            <div className='flex flex-col gap-1 sm:text-center lg:text-left'>
+                                <p className='text-gray lg:text-sm font-medium'>
                                     HUMANITARIAN MISSION
                                 </p>
                                 <h1 className='text-black text-lg font-bold'>
@@ -143,7 +142,7 @@ export default function Page() {
                                     <span className='text-cyan'>Emergency Relief</span>.
                                 </h1>
                             </div>
-                            <div className='flex flex-row gap-10 text-md text-black font-medium'>
+                            <div className='flex flex-row gap-10 lg:text-md lg:p-0 text-black font-medium sm:text-lsm sm:p-4'>
                                 <div className='flex flex-col gap-5'>
                                     <p>
                                         <span className='text-cyan'>22,690</span> &nbsp;  
@@ -188,16 +187,17 @@ export default function Page() {
                             priority={true}
                             width="0"
                             height="0"
-                            className='h-[454px] w-[454px] relative left-[100px] top-[120px]'
+                            className='lg:h-[454px] lg:w-[454px] lg:relative lg:left-[100px] lg:top-[120px] lg:opacity-100 sm:left-0 sm:top-[5600px] z-1 sm:opacity-40 sm:absolute'
                             alt='product image'
                         />
                     </div>
 
+                    
 
                     <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center gap-12 px-[187px] py-[80px]'>
-                        <div className='flex flex-col gap-3'>
-                            <p className='text-gray text-sm text-left'>OUR PRODUCTS</p>
-                            <span className='text-lg text-left font-bold leading-5'>
+                        <div className='flex flex-col gap-3 '>
+                            <p className='text-gray text-sm lg:text-left sm:text-center '>OUR PRODUCTS</p>
+                            <span className='text-lg text-left font-bold lg:leading-5 sm:leading-10 sm:text-center '>
                                 E-commerce platform for &nbsp; 
                                 <span className='text-cyan'>
                                     Organizations &nbsp;
@@ -209,24 +209,26 @@ export default function Page() {
                                 to help them raise more money
                             </span>
                         </div>
-                        <div className='flex flex-row flex-wrap justify-center items-center w-[1467px] gap-10'>
+                        <div className='flex flex-row flex-wrap justify-center items-center w-[1467px] gap-10 sm:items-center sm:justify-center sm:w-full'>
                             {[1, 2, 3, 4, 5, 6, 7, 8,].map((image, index) => (
                                         <ProductCard key={index}/>
                                     ))}
                             
                         </div>
                         <Link
-                            className='flex inline gap-4 hover:ml-4 hover:text-cyan ease-in duration-200'
+                            className='flex inline gap-2 hover:ml-4 hover:text-cyan ease-in duration-200 sm:w-[300px] sm:items-center sm:justify-center'
                             href={'/products'}
                         >
                             See more <ChevronRightIcon className='size-6 text-blue-500' />
                         </Link>
                     </div>
+                    
+                    
 
-                    <div className='flex flex-col items-center justify-center w-full h-[1000px] pb-[100px] bg-lightGray gap-[90px]'>
+                    <div className='flex flex-col items-center justify-center w-full h-[1000px] pb-[100px] bg-lightGray gap-[90px] sm:h-full'>
                         <div className='flex flex-col gap-3'>
-                            <p className='text-gray text-sm text-left'>OUR PARTNERS</p>
-                            <span className='text-lg text-left font-bold leading-5'>
+                            <p className='text-gray text-sm lg:text-left sm:text-center '>OUR PARTNERS</p>
+                            <span className='text-lg text-left font-bold lg:leading-5 sm:text-center sm:leading-10'>
                                 More than 50 &nbsp; 
                                 <span className='text-cyan'>
                                     Companies &nbsp;
@@ -238,11 +240,11 @@ export default function Page() {
                                 that trust us over the years
                             </span>
                         </div>
-                        <div className='flex flex-row items-center justify-center gap-3'>
-                            <div className='flex flex-row flex-wrap w-[879.12px] gap-3'>
+                        <div className='flex lg:flex-row items-center justify-center gap-3 sm:flex-col'>
+                            <div className='flex lg:flex-row flex-wrap lg:w-[879.12px] gap-3 sm:w-full sm:items-center sm:justify-center'>
                                 {CompaniesImages.map((image, index) => (
                                     <div 
-                                        className='flex items-center justify-center h-[94.09px] w-[210.09px] bg-white rounded-md shadow-lg hover:scale-125 hover:cursor-pointer ease-in duration-150'
+                                        className='flex items-center justify-center h-[94.09px] lg:w-[210.09px] bg-white rounded-md shadow-lg hover:scale-125 hover:cursor-pointer ease-in duration-150 sm:w-[300px]'
                                         key={index}
                                     >
                                         <Image 
@@ -256,7 +258,7 @@ export default function Page() {
                                     </div>
                                 ))}
                             </div>
-                            <div className='flex items-center justify-center text-lsm h-[204px] w-[160px] bg-white'>
+                            <div className='flex items-center justify-center text-lsm lg:h-[204px] lg:w-[160px] bg-white sm:w-[300px] sm:h-[94.09px]'>
                                 <p>and 42 mores</p>
                             </div>
                         </div>
