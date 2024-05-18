@@ -9,7 +9,7 @@ import { BookmarkIcon } from '@heroicons/react/24/outline'
 
 const Card = ({}) => {
     return (
-        <div className='flex flex-col border-black rounded-md h-[440px] w-[329px] bg-white shadow-lg' >
+        <div className='flex flex-col border-black rounded-md h-[440px] lg:w-[329px] bg-white shadow-lg sm:w-[300px]' >
             <Image 
                 src={DemoPicture}
                 priority={true}

@@ -7,7 +7,7 @@ import { ShoppingCartIcon, BuildingStorefrontIcon } from '@heroicons/react/24/ou
 
 export default function ProductCard() {
     return (
-        <div className='flex flex-col h-[500px] w-[300px] bg-white rounded-md shadow-lg'>
+        <div className='flex flex-col h-[500px] w-[300px] bg-white rounded-md shadow-lg '>
             <div className='relative'>
                     <button className='flex absolute right-4 top-4  w-[44px] h-[42px] rounded-full items-center justify-center bg-transparent border border-cyan text-cyan ease-in duration-150 hover:bg-cyan hover:text-white'>
                         <ShoppingCartIcon className="size-6 text-blue-500" />
