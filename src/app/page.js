@@ -134,7 +134,7 @@ export default function Page() {
                     </div>  
 
                     <div className='flex lg:flex-row lg:items-center lg:justify-center lg:w-full lg:h-[1000px] bg-lightGray gap-[87px] sm:flex-col sm:h-[700px] sm:h-[1000px]'>
-                        <div className='flex flex-col gzap-12 z-10'>
+                        <div className='flex flex-col gap-12 z-10'>
                             <div className='flex flex-col gap-1 sm:text-center lg:text-left'>
                                 <p className='text-gray lg:text-sm font-medium'>
                                     HUMANITARIAN MISSION
@@ -196,10 +196,10 @@ export default function Page() {
                     </div>
 
                     
-                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center gap-12 lg:px-[187px] lg:py-[80px] sm:px-2 sm:py-10 '>
+                    <div className='flex flex-col w-full h-auto bg-lightGray justify-center items-center gap-12 lg:px-[187px] lg:py-[80px] sm:px-2 sm:py-[200px]'>
                         <div className='flex flex-col gap-3 '>
                             <p className='text-gray text-sm lg:text-left sm:text-center '>OUR PRODUCTS</p>
-                            <span className='text-lg text-left font-bold lg:leading-5 sm:leading-10 sm:text-center '>
+                            <span className='text-lg text-left font-bold text-black lg:leading-5 sm:leading-10 sm:text-center '>
                                 E-commerce platform for &nbsp; 
                                 <span className='text-cyan'>
                                     Organizations &nbsp;        
@@ -229,7 +229,7 @@ export default function Page() {
                     <div className='flex flex-col items-center justify-center w-full h-[1000px] pb-[100px] bg-lightGray gap-[90px] sm:h-full sm:py-8'>
                         <div className='flex flex-col gap-3'>
                             <p className='text-gray text-sm lg:text-left sm:text-center '>OUR PARTNERS</p>
-                            <span className='text-lg text-left font-bold lg:leading-5 sm:text-center sm:leading-10'>
+                            <span className='text-lg text-left text-black font-bold lg:leading-5 sm:text-center sm:leading-10 text-black'>
                                 More than 50 &nbsp; 
                                 <span className='text-cyan'>
                                     Companies &nbsp;
@@ -260,18 +260,18 @@ export default function Page() {
                                 ))}
                             </div>
                             <div className='flex items-center justify-center text-lsm lg:h-[204px] lg:w-[160px] bg-white sm:w-[300px] sm:h-[94.09px]'>
-                                <p>and 42 mores</p>
+                                <p className='text-black'>and 42 mores</p>
                             </div>
                         </div>
                     </div> 
 
 
-                    <div className='flex items-center justify-center w-full h-[500px] bg-lightGray'>
+                    <div className='flex items-center justify-center w-full lg:h-[500px] bg-lightGray sm:h-[600px]'>
                         <div className='flex lg:flex-row lg:w-[1000px] h-[400px] bg-white shadow-xl lg:text-left lg:justify-normal lg:items-normal sm:flex-col sm:w-[300px] sm:items-center sm:justify-center sm:text-center sm:rounded-md'>
                             <div className='flex flex-col items-center justify-center w-[50%] '>
                                 <div className='flex flex-col gap-4 w-[300px] lg:justify-normal lg:items-normal sm:items-center sm:justify-center'>
                                     <h1 className='text-black font-bold text-lg leading-8'>Organization Fundraise for a <span className='text-cyan'>great cause</span></h1>
-                                    <p>Group of organization aims to support poverty, environment and animals <br />
+                                    <p className='text-black'>Group of organization aims to support poverty, environment and animals <br />
                                         with any amount of your money can help and support these organizations goal.
                                     </p>
                                     <Link 
