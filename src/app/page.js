@@ -78,7 +78,7 @@ export default function Page() {
         {users && (
             <div className='flex flex-col  w-full relative h-[5600px] sm:h-auto'>
                     <div 
-                        className='flex flex-col relative items-center justify-center w-full h-[90vh] text-center text-white gap-5 bg-black'
+                        className='flex flex-col relative items-center justify-center w-full lg:h-[100vh] text-center text-white gap-5 bg-black'
                     >   
                         <span className='text-xxl leading-[70px]'>
                             <span className='text-cyan'>Happiness</span> comes from <br /> 
@@ -126,10 +126,10 @@ export default function Page() {
                             </div>
                         </div>
                         <Link
-                            className='flex inline gap-2 hover:ml-4 hover:text-cyan ease-in duration-200 sm:w-[300px] sm:items-center sm:justify-center'
-                            href={'/donations'}
+                            className='flex inline gap-2 text-black hover:ml-4 hover:text-cyan ease-in duration-200 sm:w-[300px] sm:items-center sm:justify-center'
+                            href={'/charity'}
                         >
-                            <span>See more</span> <ChevronRightIcon className='size-6 text-blue-500' />
+                            See more <ChevronRightIcon className='size-6 text-blue-500' />
                         </Link>
                     </div>  
 
@@ -218,8 +218,8 @@ export default function Page() {
                             
                         </div>
                         <Link
-                            className='flex inline gap-2 hover:ml-4 hover:text-cyan ease-in duration-200 sm:w-[300px] sm:items-center sm:justify-center'
-                            href={'/products'}
+                            className='flex inline gap-2 text-black hover:ml-4 hover:text-cyan ease-in duration-200 sm:w-[300px] sm:items-center sm:justify-center'
+                            href={'/shop'}
                         >
                             See more <ChevronRightIcon className='size-6 text-blue-500' />
                         </Link>

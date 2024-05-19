@@ -128,13 +128,13 @@ export default function Header() {
 
             <Box 
                 className='lg:hidden'
-                sx={{ flexGrow: 1 }}
+                sx={{ flexGrow: 1,}}
             >
                 <AppBar 
                     position="fixed"
                 >
                     <Toolbar
-                        className='bg-white text-cyan'
+                        className='bg-white text-cyan h-[80px]'
                     >
                         <Link
                             href={'/'}
