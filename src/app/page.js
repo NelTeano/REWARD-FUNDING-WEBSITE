@@ -78,7 +78,7 @@ export default function Page() {
         {users && (
             <div className='flex flex-col  w-full relative h-[5600px] sm:h-auto'>
                     <div 
-                        className='flex flex-col relative items-center justify-center w-full lg:h-[100vh] text-center text-white gap-5 bg-black'
+                        className='flex flex-col relative items-center justify-center w-full h-[100vh] text-center text-white gap-5 bg-black'
                     >   
                         <span className='text-xxl leading-[70px]'>
                             <span className='text-cyan'>Happiness</span> comes from <br /> 
