@@ -16,30 +16,31 @@ export default function Page() {
                 disableGutters={true} 
                 maxWidth='100%' 
                 sx={{
-                        height: '100%',
+                        height: '800px',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
                         flexDirection: 'column',
-                        backgroundColor: '#0F111D',
+                        backgroundColor:'#E5E5E5'
                 }}
             >
                 <Box
                     sx={{
                         display: 'flex',
                         flexDirection: 'row',
-                        width: '80%',
-                        height: '800px',
-                        backgroundColor: '#0F111D',
-                        mt: '5rem'
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: 'auto',
+                        height: 'auto',
+                        backgroundColor: {xs: 'transparent'}
                     }}
+                    className="lg:shadow-lg"
                 >
                     <Box
                         sx={{
-                            display: 'flex',
-                            width: '100%',
-                            height: '800px',
-                            backgroundColor: 'white'
+                            display: {xs: 'none', md: 'flex'},
+                            height: '500px',
+                            width: '500px',
                         }}
                     >
                         <Image 
@@ -56,17 +57,17 @@ export default function Page() {
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            width: '100%',
-                            height: '800px',
-                            backgroundColor: 'white'
+                            height: '500px',
+                            width: {xs: 'auto' , md: '500px'},
+                            backgroundColor: {xs: 'transparent', md:'white'},
+                            padding: '15px'
                         }}
                     >
                         <SignIn path="/sign-in" />
-                    </Box>      
+                    </Box>
                 </Box>
             </Container>
         </>
-        
 
     );
 }
