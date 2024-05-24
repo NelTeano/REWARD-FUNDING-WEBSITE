@@ -1,8 +1,13 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import { useUser, SignInButton, SignOutButton } from '@clerk/nextjs'
 
-
-import { HomeModernIcon, Bars3Icon } from '@heroicons/react/24/solid'
+import { 
+    HomeModernIcon, 
+    Bars3Icon,
+    ShoppingCartIcon,
+    UserCircleIcon
+} from '@heroicons/react/24/solid'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 
@@ -15,7 +20,14 @@ import {
     Typography,
     Button,
     IconButton,
-    Drawer
+    Drawer,
+    Avatar,
+    Menu,
+    MenuItem,
+    Paper,
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
 } from '@mui/material'
 
 
@@ -25,7 +37,8 @@ import {
 
 export default function Header() {
 
-    const router = useRouter()
+    const router = useRouter();
+    const { isSignedIn, user } = useUser();
 
     const [headerColor, setHeaderColor] = useState({
         color: 'white',
@@ -34,6 +47,16 @@ export default function Header() {
     });
 
     const [open, setOpen] = React.useState(false);
+
+    const [showMenu, setShowMenu] = React.useState(false);
+
+    const openMenu = (event) => {
+        setShowMenu(event.currentTarget);
+    };
+
+    const closeMenu = () => {
+        setShowMenu(null);
+    };
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
@@ -91,7 +114,6 @@ export default function Header() {
             link: '/organizations',
         },
     ]
-    
 
     return (
         <React.Fragment>
@@ -107,14 +129,14 @@ export default function Header() {
                     href={'/'}
                 >
                     <div className='flex inline items-center gap-1'>
-                        <HomeModernIcon className="size-7 text-blue-500"/>
+                        <HomeModernIcon className="size-7 text-blue-500"/>                  
                         <span>
                             Rew 
                             <span className='font-bold'>Fund</span>
                         </span>
                     </div>
                 </Link>
-                <div className='flex flex-row gap-10'>
+                <div className='flex flex-row gap-10 items-center'>
                     {HeaderRoutes.map((header, index) => (
                         <Link
                             key={index}
@@ -123,6 +145,47 @@ export default function Header() {
                             <p>{header.name}</p>
                         </Link>
                     ))}
+                    {isSignedIn ? (
+                        <>
+                        <Avatar 
+                            alt="User Profile" 
+                            src={user.imageUrl} 
+                            onClick={openMenu}
+                            sx={{
+                                cursor: 'pointer'
+                            }}
+                        />
+                            <Menu
+                                anchorEl={showMenu}
+                                open={showMenu}
+                                onClose={closeMenu}
+                            >   
+                                <Box 
+                                    sx={{
+                                        display:'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width:'200px'
+                                    }}
+                                >
+                                    <MenuItem>My Profile</MenuItem>
+                                    <MenuItem>Cart</MenuItem>
+                                    <MenuItem>
+                                        <SignOutButton>
+                                            Logout
+                                        </SignOutButton>
+                                    </MenuItem>
+                                </Box>
+                            </Menu>
+                        </>
+                    ) : (
+                        <SignInButton
+                            className='bg-cyan text-white w-[100px] rounded-lg py-2'
+                        >
+                            Sign In
+                        </SignInButton>
+                    )}
                 </div>
             </nav>
 
@@ -165,20 +228,67 @@ export default function Header() {
                     <Drawer open={open} anchor='top' onClose={toggleDrawer(false)}>
                         <Box
                             sx={{
-                                height: '400px',
+                                height: 'auto',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 gap: '10px',
-                            }}
+                                paddingTop: '10px',
+                                paddingBottom: '20px'
+                            }}  
                             className='bg-white'
                         >
+                            <Accordion
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: 'transparent',
+                                    color: '#13ADB7',
+                                    width: '100%',
+                                    boxShadow: 'none'
+                                }}
+                            >
+                                <AccordionSummary 
+                                    sx={{fontWeight: '600', fontSize: '16px'}}
+                                >My Account</AccordionSummary>
+                                <AccordionDetails
+                                    sx={{
+                                        display: 'inline-flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '100%',
+                                        gap: '5px'
+                                    }}
+                                >
+                                    Profile 
+                                    <UserCircleIcon className='size-6 text-cyan' />
+                                </AccordionDetails>
+                                <AccordionDetails
+                                    sx={{
+                                        display: 'inline-flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '100%',
+                                        gap: '5px'
+                                    }}
+                                >
+                                    Cart 
+                                    <ShoppingCartIcon className='size-6 text-cyan'/>
+                                </AccordionDetails>
+                            </Accordion>
                             {HeaderRoutes.map((header, index) => (
                                     <Button 
                                         key={index}
-                                        sx={{color: '#13ADB7'}}
-                                        className='flex items-center justify-center text-md w-full h-[60px]'
+                                        sx={{
+                                            color: '#13ADB7',
+                                            fontWeight: '600',
+                                            textTransform: 'capitalize',
+                                            fontSize: '16px'
+                                        }}
+                                        className='flex items-center justify-center w-full h-[60px]'
                                         onClick={() => router.push(`${header.link}`)}
                                     >
                                         {header.name}

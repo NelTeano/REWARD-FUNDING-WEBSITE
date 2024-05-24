@@ -1,8 +1,8 @@
 'use client';
-import { Roboto } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
 import { createTheme } from '@mui/material/styles';
 
-const roboto = Roboto({
+const sans = DM_Sans({
     weight: ['300', '400', '500', '700'],
     subsets: ['latin'],
     display: 'swap',
@@ -10,7 +10,7 @@ const roboto = Roboto({
 
 const theme = createTheme({
     typography: {
-        fontFamily: roboto.style.fontFamily,
+        fontFamily: sans.style.fontFamily,
     },
     breakpoints: {
         values: {
