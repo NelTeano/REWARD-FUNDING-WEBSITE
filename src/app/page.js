@@ -74,7 +74,7 @@ export default function Page() {
 
 
     return (
-        <>
+        <>  
         {users && (
             <div className='flex flex-col  w-full relative h-[5600px] sm:h-auto'>
                     <div 
@@ -211,8 +211,8 @@ export default function Page() {
                                 to help them raise more money
                             </span>
                         </div>
-                        <div className='flex flex-row flex-wrap justify-center items-center w-[1467px] gap-10 sm:items-center sm:justify-center sm:w-full'>
-                            {[1, 2, 3, 4, 5, 6, 7, 8,].map((image, index) => (
+                        <div className='flex flex-row flex-wrap justify-center items-center lg:w-[900px] lg:gap-4 sm:gap-1 sm:items-center sm:justify-center sm:w-full'>
+                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((image, index) => (
                                         <ProductCard key={index}/>
                                     ))}
                             
