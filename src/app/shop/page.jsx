@@ -33,51 +33,61 @@ const Page = () => {
         <div className='flex flex-col w-full lg:h-auto mb-[200px] sm:h-auto'>
             
             <div className="flex flex-col items-center justify-center">
-                <div className="flex flex-row gap-2 h-auto w-[1300px] mt-[100px] text-black">
-                    <div className="flex flex-col w-[20%] min-h-[1300px] gap-4">
+                <div className="flex lg:flex-row lg:gap-2 h-auto lg:w-[1300px] lg:mt-[100px] text-black sm:flex-col sm:w-full sm:mt-4 sm:gap-8">
+                    <div className="flex flex-col lg:w-[20%] lg:min-h-[1300px] lg:ml-0 sm:min-h-[300px] gap-4 sm:w-[80%] sm:ml-4">
                         <div>
                             <h1 className='py-2 text-md font-medium'>Organization</h1>
                             <Divider />
-                            {[
-                                "Unicef",
-                                "Haribon",
-                                "SpringBoard Foundation",
-                                "PAWS", 
-                                "Red Cross", 
-                                "Bantay Bata", 
-                                "Gawad Kalinga", 
-                                "Angat Buhay", 
-                                "Waves for Water"
-                                
-                            ].map((organizations, index) => (
-                                <p className='text-lsm mt-1' key={index}>{organizations}</p>
-                            ))}
+                            <div className='flex lg:flex-col sm:flex-row sm:flex-wrap sm:gap-2'>
+                                {[
+                                    "Unicef",
+                                    "Haribon",
+                                    "SpringBoard Foundation",
+                                    "PAWS", 
+                                    "Red Cross", 
+                                    "Bantay Bata", 
+                                    "Gawad Kalinga", 
+                                    "Angat Buhay", 
+                                    "Waves for Water"
+                                    
+                                ].map((organizations, index) => (
+                                    <p className='text-lsm mt-1' key={index}>{organizations}</p>
+                                ))}
+                            </div>
                         </div>
                         <div>
                             <h1 className='py-2 text-md font-medium'>Categories</h1>
                             <Divider />
-                            {[
-                                "Necklace",
-                                "Bracelets",
-                                "Watches",
-                                "Rings",
-                                "Hats", 
-                                "Earrings", 
-                                "Sun Glasses", 
-                                "Hand Bags", 
-                                "Scarf", 
-                                "Wallets",
-                                "Sunglasses",
-                                "Umbrella",
-                            ].map((category, index) => (
-                                <p className='text-lsm mt-1' key={index}>{category}</p>
-                            ))}
+                            <div className='flex lg:flex-col sm:flex-row sm:flex-wrap sm:gap-2'>
+                                {[
+                                    "Necklace",
+                                    "Bracelets",
+                                    "Watches",
+                                    "Rings",
+                                    "Hats", 
+                                    "Earrings", 
+                                    "Sun Glasses", 
+                                    "Hand Bags", 
+                                    "Scarf", 
+                                    "Wallets",
+                                    "Sunglasses",
+                                    "Umbrella",
+                                ].map((category, index) => (
+                                    <p className='text-lsm mt-1' key={index}>{category}</p>
+                                ))}
+                            </div>
                         </div>
                         <div>
                             <h1 className='py-2 text-md font-medium'>Gender</h1>
                             <Divider />
                             <FormControl>
-                                <FormGroup sx={{fontSize: '16px',}} column="true">
+                                <FormGroup 
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: {xs: 'row', md: 'column', lg: 'column'},
+                                        fontSize: '16px',
+                                    }}  
+                                >
                                     <FormControlLabel
                                         value="Male"
                                         control={<Checkbox />}
@@ -94,16 +104,16 @@ const Page = () => {
                             </FormControl>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4 w-[70%] min-h-[1300px]">
-                        <h1 className='text-lg ml-6 font-bold uppercase'>accessories</h1>
-                        <div className='flex flex-row items-center justify-center flex-wrap gap-4 w-full h-auto'>
+                    <div className="flex flex-col gap-4 lg:w-[70%] min-h-[1300px] sm:w-full lg:items-start lg:justify-start sm:items-center sm:justify-center">
+                        <h1 className='text-lg lg:ml-6 font-bold uppercase sm:ml-0'>accessories</h1>
+                        <div className='flex flex-row items-center justify-center flex-wrap gap-1 w-full h-auto '>
                             {
                                 [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map((products, index)=>(
                                     <ProductCard key={index} />
                                 ))
                             }
                         </div>
-                        <div className='flex items-center justify-center w-full'>
+                        <div className='flex items-center justify-center lg:w-full sm:w-[80%]'>
                             <Button sx={{
                                 backgroundColor: '#13ADB7',
                                 width: '371px',
@@ -119,7 +129,6 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

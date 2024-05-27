@@ -105,22 +105,8 @@ export default function Page() {
                                     donations
                                 </h1>
                             </div>
-                            <div className='flex lg:flex-row lg:w-[500px] gap-2 sm:flex-wrap sm:w-[300px] sm:items-center sm:justify-center'>
-                                <button className='border text-[16px] text-white border-cyan rounded-lg w-[50px] h-[38px] bg-cyan'>
-                                    All
-                                </button>
-
-                                {["Homeless", "Food Crisis", "Disaster", "Education"].map((categories, index) => (
-                                    <button 
-                                        className='border text-[16px] text-cyan border-cyan rounded-lg w-[93px] h-[38px] hover:text-white hover:bg-cyan'
-                                        key={index}
-                                    >
-                                        {categories}
-                                    </button>
-                                ))}
-                            </div>
                             <div className='flex lg:flex-row flex-wrap lg:w-[1067px] gap-10 sm:flex-col sm:items-center sm:justify-center sm:w-full'>
-                                {[1,2,3,4,5,6,7,8,9].map((card, index) => (
+                                {[1,2,3,4,5,6].map((card, index) => (
                                     <DonationCard key={index}/>
                                 ))}
                             </div>
@@ -190,7 +176,7 @@ export default function Page() {
                             priority={true}
                             width="0"
                             height="0"
-                            className='lg:h-[454px] lg:w-[454px] lg:relative lg:left-[100px] lg:top-[120px] lg:opacity-100 sm:left-0 sm:top-[5600px] z-1 sm:opacity-40 sm:absolute'
+                            className='lg:h-[454px] lg:w-[454px] lg:relative lg:left-[100px] lg:top-[120px] lg:opacity-100 sm:left-0 sm:top-[4300px] z-1 sm:opacity-40 sm:absolute'
                             alt='product image'
                         />
                     </div>

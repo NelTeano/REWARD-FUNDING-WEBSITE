@@ -31,9 +31,12 @@ export default function Page() {
             {organizations && (
                 <div className='flex flex-col w-full relative h-auto bg-lightGray'>
 
-                    <div className='flex w-full h-[400px] bg-black text-xxl text-white justify-center items-center'>
-                        <h1>Organization Donation</h1>
-                    </div>
+            <div className="flex flex-col items-center justify-center gap-4 bg-black h-[450px] w-full">
+                <h1 className="text-white text-xxl font-bold">Donations for Organizations</h1>
+                <p className="text-white text-md font-medium text-center">
+                    Support and donate through RewFund, help us raise funds for charitable organizations. <br /> 
+                    Your contribution makes a difference!                </p>
+            </div>
 
                     <div className='flex w-full h-[200px] bg-lightGray py-8 text-md text-black items-center '>
                         <div className='flex flex-row relative ml-[70px] gap-16'>
@@ -62,9 +65,6 @@ export default function Page() {
                             ))}
                         </div>
                     </div>
-
-
-
                 </div>
             )}
         </React.Fragment>
