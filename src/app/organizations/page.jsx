@@ -31,32 +31,32 @@ export default function Page() {
             {organizations && (
                 <div className='flex flex-col w-full relative h-auto bg-lightGray'>
 
-            <div className="flex flex-col items-center justify-center gap-4 bg-black h-[450px] w-full">
-                <h1 className="text-white text-xxl font-bold">Donations for Organizations</h1>
-                <p className="text-white text-md font-medium text-center">
+            <div className="flex flex-col items-center justify-center gap-4 bg-black lg:h-[450px] w-full sm:h-[350px] lg:mt-0 sm:mt-10">
+                <h1 className="text-white lg:text-xxl text-center font-bold sm:text-lg">Donations for Organizations</h1>
+                <p className="text-white lg:text-md font-medium text-center sm:text-sm">
                     Support and donate through RewFund, help us raise funds for charitable organizations. <br /> 
                     Your contribution makes a difference!                </p>
             </div>
 
-                    <div className='flex w-full h-[200px] bg-lightGray py-8 text-md text-black items-center '>
-                        <div className='flex flex-row relative ml-[70px] gap-16'>
+                    <div className='flex w-full h-[200px] bg-lightGray py-8 text-md text-black items-center lg:justify-start sm:justify-center '>
+                        <div className='flex flex-row relative lg:ml-[70px] lg:gap-16 sm:ml-2 sm:gap-2'>
                             <Image 
                                 src={BannerImg}
                                 priority={true}
                                 width="0"
                                 height="0"
-                                className='h-[140px] w-[249px] relative'
+                                className='lg:h-[140px] lg:w-[249px] relative sm:h-[120px] sm:w-[170px]'
                                 alt='product image'
                             />
-                            <p className='leading-8'>
+                            <p className='lg:leading-8 lg:text-md sm:text-sm'>
                                 You&apos;re supporting <strong>Organizations that Helps People</strong> <br />
                                 Your donation will benefit <strong>People and Environment</strong>
                             </p>
                         </div>
                     </div>
-
+                    
                     <div className='flex flex-col justify-center items-center'>
-                        <div className='flex flex-row flex-wrap w-[1200px] py-10 justify-center items-center gap-10'>
+                        <div className='flex flex-row flex-wrap lg:w-[1200px] py-10 justify-center items-center gap-10 sm:w-full'>
                             {organizations.map((details, index) => (
                                 <OrgCard 
                                     key={index}

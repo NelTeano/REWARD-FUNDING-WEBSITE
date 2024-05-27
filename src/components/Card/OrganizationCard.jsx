@@ -14,22 +14,7 @@ export default function OrganizationCard({product}) {
 
 
     return (
-        <div className='flex flex-col w-[500px] py-6 px-10 min-h-[400px] h-auto bg-white text-gray gap-6 rounded-lg shadow-lg'>
-            {/* {product.name}
-            <Image 
-                src={product.images[0]}
-                alt={`Image of ${product.name}`}
-                width={400}
-                height={400}
-                className='h-[250px] w-[250px]'
-                priority={true}
-            /> 
-            {product.description}
-            <Link
-                href={product.metadata.link}
-            >
-                Donate now
-            </Link>  */}
+        <div className='flex flex-col lg:w-[500px] py-6 px-10 lg:min-h-[400px] h-auto bg-white text-gray gap-6 rounded-lg shadow-lg sm:w-[280px] sm:min-h-[300px]'>
             <div className='flex justify-center items-center w-full text-md font-bold'>
                 <div className='flex w-[500px] text-black'>
                     <p>Organization</p>

@@ -57,7 +57,7 @@ export default function Layout({ children }) {
                     }
                 </div>
             </div>
-            <main>
+            <main className='bg-lightGray'>
                 {children}
             </main>
         </>   

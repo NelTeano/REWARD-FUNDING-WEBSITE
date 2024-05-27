@@ -262,7 +262,7 @@ export default function Page() {
                                     </p>
                                     <Link 
                                         className='flex items-center justify-center rounded-lg w-[166px] h-[55px] bg-black text-white gap-2'
-                                        href={'/Organizations'}
+                                        href={'/organizations'}
                                     >
                                         Donate now <BanknotesIcon className='size-6 text-blue-500' />
                                     </Link>

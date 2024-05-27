@@ -31,7 +31,6 @@ import {
 const Page = () => {
     return (
         <div className='flex flex-col w-full lg:h-auto mb-[200px] sm:h-auto'>
-            
             <div className="flex flex-col items-center justify-center">
                 <div className="flex lg:flex-row lg:gap-2 h-auto lg:w-[1300px] lg:mt-[100px] text-black sm:flex-col sm:w-full sm:mt-4 sm:gap-8">
                     <div className="flex flex-col lg:w-[20%] lg:min-h-[1300px] lg:ml-0 sm:min-h-[300px] gap-4 sm:w-[80%] sm:ml-4">
