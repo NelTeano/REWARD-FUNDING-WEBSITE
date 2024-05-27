@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { useUser, SignInButton, SignOutButton } from '@clerk/nextjs'
 
 import { 
-    HomeModernIcon, 
     Bars3Icon,
     ShoppingCartIcon,
-    UserCircleIcon
-} from '@heroicons/react/24/solid'
+    UserCircleIcon,
+    ArrowRightStartOnRectangleIcon
+} from '@heroicons/react/24/outline'
+
+import { HomeModernIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 
@@ -169,13 +171,38 @@ export default function Header() {
                                         width:'200px'
                                     }}
                                 >
-                                    <MenuItem>My Profile</MenuItem>
-                                    <MenuItem>Cart</MenuItem>
-                                    <MenuItem>
-                                        <SignOutButton>
-                                            Logout
-                                        </SignOutButton>
+                                    <MenuItem 
+                                        sx={{
+                                            display:'flex',
+                                            width: '100%',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}  
+                                    >
+                                        My Profile
                                     </MenuItem>
+                                    <MenuItem
+                                        sx={{
+                                            display:'flex',
+                                            width: '100%',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }} 
+                                    >
+                                        Cart
+                                    </MenuItem>
+                                    <SignOutButton>
+                                        <MenuItem
+                                            sx={{
+                                                display:'flex',
+                                                width: '100%',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }} 
+                                        >
+                                                Sign out
+                                        </MenuItem>
+                                    </SignOutButton>
                                 </Box>
                             </Menu>
                         </>
@@ -252,8 +279,13 @@ export default function Header() {
                                 }}
                             >
                                 <AccordionSummary 
-                                    sx={{fontWeight: '600', fontSize: '16px'}}
-                                >My Account</AccordionSummary>
+                                    sx={{
+                                        fontWeight: '600', 
+                                        fontSize: '16px'
+                                    }}
+                                >
+                                    My Account
+                                </AccordionSummary>
                                 <AccordionDetails
                                     sx={{
                                         display: 'inline-flex',
@@ -278,6 +310,20 @@ export default function Header() {
                                     Cart 
                                     <ShoppingCartIcon className='size-6 text-cyan'/>
                                 </AccordionDetails>
+                                <SignOutButton>
+                                    <AccordionDetails
+                                        sx={{
+                                            display: 'inline-flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            width: '100%',
+                                            gap: '5px'
+                                        }}
+                                    >
+                                        Sign out 
+                                        <ArrowRightStartOnRectangleIcon className='size-6 text-cyan'/>
+                                    </AccordionDetails>
+                                </SignOutButton>
                             </Accordion>
                             {HeaderRoutes.map((header, index) => (
                                     <Button 
