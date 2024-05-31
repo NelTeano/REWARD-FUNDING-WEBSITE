@@ -3,7 +3,7 @@ import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 
 // COMPONENTS
-import { useAuth,  SignOutButton} from "@clerk/nextjs";
+import { useAuth, useUser, SignOutButton} from "@clerk/nextjs";
 import Payment from '@/components/payment/Payment';
 import Image from 'next/image';
 import DonationCard from '@/components/Card/DonationCard';
@@ -47,35 +47,56 @@ const CompaniesImages = [
 
 export default function Page() {
 
-    const { isLoaded, userId, sessionId, getToken, signOut } = useAuth();
+    const { isLoaded, userId,} = useAuth();
+    const { user } = useUser();
 
-    const [users, setUsers] = useState(['']);
 
     useEffect(() => {
+
         
-            const getAllUsers = async () => {
+        
+        if(user && isLoaded && userId){
+
+            const userEmail =  user.primaryEmailAddress.emailAddress;
+
+            const registerUser = async () => {
+        
                 try {
-                    const getUsers = await axios.get('https://deploy-express-vercel-ashy.vercel.app/api/users');
-                    setUsers(getUsers.data);
-                    console.log(getUsers.data);
+                    const getDetails = await axios.get(`https://deploy-express-vercel-ashy.vercel.app/api/check-register/${userEmail}`);
+                    
+                    console.log(getDetails)
+
+                    if (getDetails.data) {
+                        console.log("Registered:", getDetails);
+                        return;
+                    } else {
+                        const registerUser = {
+                            subId: user.id,
+                            name: user.fullName,
+                            email: user.primaryEmailAddress.emailAddress, 
+                            prod_liked: ["productid123123"],
+                            isRegistered: true
+                        };
+        
+                        const saveUser = await axios.post('https://deploy-express-vercel-ashy.vercel.app/api/save-user', registerUser);
+                        console.log("Registered and saved user:", saveUser.data);
+                    }
+
                 } catch (error) {
-                    console.log("Fetch Data Error", error)
+                    console.error("Fetch Data Error", error);
                 }
-            }
+            };
 
-            getAllUsers();
-    }, [isLoaded, userId])
+            registerUser();
+        }
 
-    
+    }, [isLoaded, userId, user]);
 
-    // console.log("user: ", users[0].name);
-    // console.log("user: ", users[0].email)
-    // <BeakerIcon className="size-6 text-blue-500" /> 
 
 
     return (
         <>  
-        {users && (
+        {isLoaded && (
             <div className='flex flex-col  w-full relative h-[5600px] sm:h-auto'>
                     <div 
                         className='flex flex-col relative items-center justify-center w-full h-[100vh] text-center text-white gap-5 bg-black'
