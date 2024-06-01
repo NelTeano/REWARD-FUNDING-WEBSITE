@@ -83,7 +83,7 @@ export default function Page() {
                     }
 
                 } catch (error) {
-                    console.error("Fetch Data Error", error);
+                    console.error("Register Function Error", error);
                 }
             };
 

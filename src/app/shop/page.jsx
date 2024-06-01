@@ -1,5 +1,6 @@
-
-
+'use client'
+import React, { useEffect, useState} from 'react'
+import axios from 'axios'
 
 // COMPONENTS
 import ProductCard from '@/components/Card/ProductCard'
@@ -28,7 +29,28 @@ import {
 } from '@mui/material'
 
 
+
 const Page = () => {
+
+    const [products, setProducts] = useState(['']);
+
+    useEffect(()=>{
+
+        const getProducts = async () => {
+            try {
+                const getProducts = await axios.get(`https://express-testing-api.vercel.app/api/shop-products`);
+                setProducts(getProducts.data);
+                console.log(products);
+            } catch (error) {
+                console.error("Register Function Error", error);
+            }
+        }
+
+        getProducts();
+    },[products])
+
+
+
     return (
         <div className='flex flex-col w-full lg:h-auto sm:h-auto'>
             <div className="flex flex-col items-center justify-center mb-[200px]">
@@ -107,9 +129,11 @@ const Page = () => {
                         <h1 className='text-lg lg:ml-6 font-bold uppercase sm:ml-0'>accessories</h1>
                         <div className='flex flex-row items-center justify-center flex-wrap gap-1 w-full h-auto '>
                             {
-                                [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map((products, index)=>(
-                                    <ProductCard key={index} />
-                                ))
+                                products && (
+                                    products.map((products, index)=>(
+                                        <ProductCard productDetails={products} key={index} />
+                                    ))
+                                )
                             }
                         </div>
                         <div className='flex items-center justify-center lg:w-full sm:w-[80%]'>

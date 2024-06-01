@@ -189,7 +189,7 @@ export default function Header() {
                                             alignItems: 'center',
                                         }} 
                                     >
-                                        Cart
+                                        Favorites & Cart
                                     </MenuItem>
                                     <SignOutButton>
                                         <MenuItem
@@ -286,30 +286,38 @@ export default function Header() {
                                 >
                                     My Account
                                 </AccordionSummary>
-                                <AccordionDetails
-                                    sx={{
-                                        display: 'inline-flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        width: '100%',
-                                        gap: '5px'
-                                    }}
+                                <Link
+                                    href={'/profile'}
                                 >
-                                    Profile 
-                                    <UserCircleIcon className='size-6 text-cyan' />
-                                </AccordionDetails>
-                                <AccordionDetails
-                                    sx={{
-                                        display: 'inline-flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        width: '100%',
-                                        gap: '5px'
-                                    }}
+                                    <AccordionDetails
+                                        sx={{
+                                            display: 'inline-flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            width: '100%',
+                                            gap: '5px'
+                                        }}
+                                    >
+                                        Profile 
+                                        <UserCircleIcon className='size-6 text-cyan' />
+                                    </AccordionDetails>
+                                </Link>
+                                <Link
+                                    href={'/favorites'}
                                 >
-                                    Cart 
-                                    <ShoppingCartIcon className='size-6 text-cyan'/>
-                                </AccordionDetails>
+                                    <AccordionDetails
+                                        sx={{
+                                            display: 'inline-flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            width: '100%',
+                                            gap: '5px'
+                                        }}
+                                    >
+                                        Favorites & Cart 
+                                        <ShoppingCartIcon className='size-6 text-cyan'/>
+                                    </AccordionDetails>
+                                </Link>
                                 <SignOutButton>
                                     <AccordionDetails
                                         sx={{
