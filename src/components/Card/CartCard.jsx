@@ -77,7 +77,7 @@ export default function CartCard({cartDetails, updatedCardData}) {
                     />
                 </div>
                 <div
-                    className='flex flex-col gap-2 lg:text-lsm sm:text-sm'
+                    className='flex flex-col gap-2 lg:text-lsm text-black sm:text-sm'
                 >
                     <p dangerouslySetInnerHTML={{ __html: displayName }}></p>
                     <Select
@@ -109,7 +109,7 @@ export default function CartCard({cartDetails, updatedCardData}) {
                 className="flex lg:flex-row h-auto lg:gap-12 lg:items-center lg:justify-center lg:mt-0 sm:flex-col sm:gap-2 lg:items-start lg:justify-start sm:mt-2"
             >
                 <div
-                    className='flex flex-row items-center border border-black rounded-md p-0.5'
+                    className='flex flex-row items-center border border-black rounded-md p-0.5 text-black'
                 >
                     <button
                         className='bg-white lg:w-[30px] lg:h-[30px] sm:w-[18px] sm:h-[18px]'
@@ -134,8 +134,8 @@ export default function CartCard({cartDetails, updatedCardData}) {
                         +
                     </button>
                 </div>
-                <p className='text-lsm sm:text-right'>₱ {cartDetails.price}</p>
-                <p className='text-lsm font-bold lg:block sm:hidden'>₱ {cartDetails.price * quantity}</p>
+                <p className='text-lsm sm:text-right text-black'>₱ {cartDetails.price}</p>
+                <p className='text-lsm font-bold lg:block sm:hidden text-black'>₱ {cartDetails.price * quantity}</p>
             </div>
         </div>    
     )

@@ -110,7 +110,7 @@ const Page = ({}) => {
                     <div
                         className='flex flex-col relative items-center justify-center w-full h-auto min-h-[100vh] bg-lightGray mt-20 gap-8 lg:pb-0 sm:pb-[100px]'
                     >
-                            <h1 className='text-lg'>Shopping Cart</h1>
+                            <h1 className='text-lg text-black'>Shopping Cart</h1>
                             <div
                                 className="flex lg:flex-row lg:w-[1120px] min-h-[642px] bg-lightGray justify-between lg:items-start sm:items-center sm:flex-col sm:w-full lg:gap-0 sm:gap-[100px]"
                             >   
@@ -121,7 +121,7 @@ const Page = ({}) => {
                                         className="flex flex-row h-[50px] justify-between w-full border-[#6C7275] border-b-2 font-medium lg:text-lsm sm:text-md"
                                     >
                                         <div>
-                                            <p className='lg:ml-0 sm:ml-2'>Product</p>
+                                            <p className='lg:ml-0 sm:ml-2 text-black'>Product</p>
                                         </div>
                                         <div
                                             className="lg:flex gap-12 sm:hidden"
@@ -170,19 +170,19 @@ const Page = ({}) => {
                                             className='flex flex-col justify-between'
                                         >
                                             <div
-                                                className='flex flex-row justify-between items-center h-[52px] border-[#6C7275] border-b text-lsm font-medium'
+                                                className='flex flex-row justify-between items-center h-[52px] border-[#6C7275] border-b text-lsm font-medium text-black'
                                             >
                                                 <p>Subtotal</p>
                                                 <h1>₱ {computedSubTotal}</h1>
                                             </div>
                                             <div
-                                                className='flex flex-row justify-between items-center h-[52px] text-md font-bold'
+                                                className='flex flex-row justify-between items-center h-[52px] text-md font-bold text-black'
                                             >
                                                 <p>Total</p>
                                                 <h1>₱ {computedSubTotal}</h1>
                                             </div>
                                             <button
-                                                className='flex justify-center items-center h-[52px] w-full bg-black text-white rounded-md'
+                                                className='flex justify-center items-center h-[52px] w-full bg-black text-white rounded-md text-black'
                                             >
                                                 Checkout
                                             </button>
