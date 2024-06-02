@@ -44,7 +44,7 @@ export default function Header() {
 
     const [headerColor, setHeaderColor] = useState({
         color: 'white',
-        bgColor: 'transparent',
+        bgColor: '#0F111D',
         shadow: 'none'
     });
 
@@ -171,26 +171,36 @@ export default function Header() {
                                         width:'200px'
                                     }}
                                 >
-                                    <MenuItem 
-                                        sx={{
-                                            display:'flex',
-                                            width: '100%',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}  
-                                    >
-                                        My Profile
-                                    </MenuItem>
-                                    <MenuItem
-                                        sx={{
-                                            display:'flex',
-                                            width: '100%',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }} 
-                                    >
-                                        Favorites & Cart
-                                    </MenuItem>
+                                    <Link
+                                        href={'/profile'}
+                                        className='w-full'
+                                    > 
+                                        <MenuItem 
+                                            sx={{
+                                                display:'flex',
+                                                width: '100%',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}  
+                                        >
+                                            My Profile
+                                        </MenuItem>
+                                    </Link>
+                                    <Link
+                                        href={'/favorites'}
+                                        className='w-full'
+                                    > 
+                                        <MenuItem
+                                            sx={{
+                                                display:'flex',
+                                                width: '100%',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }} 
+                                        >
+                                            Favorites & Cart
+                                        </MenuItem>
+                                    </Link>
                                     <SignOutButton>
                                         <MenuItem
                                             sx={{
