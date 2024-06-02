@@ -81,6 +81,7 @@ const Page = () => {
                             <Divider />
                             <div className='flex lg:flex-col sm:flex-row sm:flex-wrap sm:gap-2'>
                                 {[
+                                    "All",
                                     "Necklace",
                                     "Bracelets",
                                     "Watches",

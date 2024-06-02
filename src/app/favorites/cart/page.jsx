@@ -151,14 +151,14 @@ const Page = ({}) => {
                                         >
                                             <div>
                                                 <h1 
-                                                    className='text-lg'
+                                                    className='text-lg text-black'
                                                 >
                                                     Cart Summary
                                                 </h1>
                                             </div>
                                             {cartData.map((items, index)=> (
                                                 <div 
-                                                    className='flex flex-row justify-between lg:text-lsm sm:text-sm'
+                                                    className='flex flex-row justify-between text-black lg:text-lsm sm:text-sm'
                                                     key={index}
                                                 >
                                                         <p>{items.name}</p> 
