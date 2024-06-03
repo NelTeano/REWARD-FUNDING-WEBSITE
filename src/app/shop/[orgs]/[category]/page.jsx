@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState} from 'react'
+import { useParams } from 'next/navigation';
 import axios from 'axios'
 
 // COMPONENTS
@@ -27,10 +28,18 @@ import {
     FormLabel,
     Divider 
 } from '@mui/material'
+import Link from 'next/link';
+
 
 
 
 const Page = () => {
+
+    const params = useParams();
+    const { orgs , category } = params;
+    console.log(orgs, category);
+
+
 
     const [products, setProducts] = useState(['']);
 
@@ -49,7 +58,34 @@ const Page = () => {
         getProducts();
     },[products])
 
+    const categories = [
+        "All",
+        "Necklace",
+        "Bracelets",
+        "Watches",
+        "Rings",
+        "Hats", 
+        "Earrings", 
+        "Sun Glasses", 
+        "Hand Bags", 
+        "Scarf", 
+        "Wallets",
+        "Sunglasses",
+        "Umbrella",
+    ]
 
+    const organizations = [
+        "All",
+        "Unicef",
+        "Haribon",
+        "SpringBoard Foundation",
+        "PAWS", 
+        "Red Cross", 
+        "Bantay Bata", 
+        "Gawad Kalinga", 
+        "Angat Buhay", 
+        "Waves for Water"
+    ]
 
     return (
         <div className='flex flex-col w-full lg:h-auto sm:h-auto'>
@@ -60,19 +96,19 @@ const Page = () => {
                             <h1 className='py-2 text-md font-medium'>Organization</h1>
                             <Divider />
                             <div className='flex lg:flex-col sm:flex-row sm:flex-wrap sm:gap-2'>
-                                {[
-                                    "Unicef",
-                                    "Haribon",
-                                    "SpringBoard Foundation",
-                                    "PAWS", 
-                                    "Red Cross", 
-                                    "Bantay Bata", 
-                                    "Gawad Kalinga", 
-                                    "Angat Buhay", 
-                                    "Waves for Water"
-                                    
-                                ].map((organizations, index) => (
-                                    <p className='text-lsm mt-1' key={index}>{organizations}</p>
+                                {organizations.map((organizations, index) => (
+                                    organizations.toLowerCase() === orgs.toLowerCase() ? (
+                                        <p className='text-lsm mt-1 text-cyan' key={index}>{organizations}</p>
+                                    ) : (
+                                        <Link 
+                                            href={`/shop/${organizations.replace(/\s/g, '').toLowerCase()}/${category}`}
+                                            key={index}
+                                        >
+                                            <p className='text-lsm mt-1'>
+                                                {organizations}
+                                            </p>
+                                        </Link>
+                                    )
                                 ))}
                             </div>
                         </div>
@@ -80,22 +116,17 @@ const Page = () => {
                             <h1 className='py-2 text-md font-medium'>Categories</h1>
                             <Divider />
                             <div className='flex lg:flex-col sm:flex-row sm:flex-wrap sm:gap-2'>
-                                {[
-                                    "All",
-                                    "Necklace",
-                                    "Bracelets",
-                                    "Watches",
-                                    "Rings",
-                                    "Hats", 
-                                    "Earrings", 
-                                    "Sun Glasses", 
-                                    "Hand Bags", 
-                                    "Scarf", 
-                                    "Wallets",
-                                    "Sunglasses",
-                                    "Umbrella",
-                                ].map((category, index) => (
-                                    <p className='text-lsm mt-1' key={index}>{category}</p>
+                                {categories.map((categories, index) => (
+                                    categories.toLowerCase() === category.toLowerCase() ? (
+                                        <p className='text-lsm mt-1 text-cyan' key={index}> {categories}</p>
+                                    ) : (
+                                        <Link 
+                                        href={`/shop/${orgs}/${categories.replace(/\s/g, '').toLowerCase()}`}
+                                        key={index}
+                                        >
+                                            <p className='text-lsm mt-1' key={index}>{categories}</p> 
+                                        </Link>
+                                    )
                                 ))}
                             </div>
                         </div>

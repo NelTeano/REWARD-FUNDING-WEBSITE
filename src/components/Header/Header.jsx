@@ -109,7 +109,7 @@ export default function Header() {
         },
         {
             name: 'Shop',
-            link: '/shop',
+            link: '/shop/all/all',
         },
         {
             name: 'Organizations',
