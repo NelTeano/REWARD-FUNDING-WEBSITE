@@ -74,7 +74,6 @@ export default function Page() {
                             subId: user.id,
                             name: user.fullName,
                             email: user.primaryEmailAddress.emailAddress, 
-                            prod_liked: ["productid123123"],
                             isRegistered: true
                         };
         
