@@ -1,3 +1,4 @@
+'use client'
 import DemoPicture from '../../../public/assets/Necklace.jpg'
 import OrgImage from '../../../public/assets/Companies/unicef.png'
 import Image from 'next/image'

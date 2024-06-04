@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image"
 import { TrashIcon } from '@heroicons/react/24/solid'
 import { useEffect, useState, useMemo } from "react";
