@@ -30,6 +30,21 @@ import {
     Divider 
 } from '@mui/material'
 import Link from 'next/link';
+import Loader from '@/components/Loader/Loader'
+
+// RECOMMENDATION CAALCULATE FUNCTIONS
+import { findKNN, productToVector } from './recommendKNN'
+
+const RecommendationAlgorithm = (productsLiked, allProducts, k) => {
+    const productVectors = allProducts.map(product => productToVector(product));
+    const likedProductVectors = productsLiked.slice(0, 5).map(product => productToVector(product)); // Consider up to 5 liked products
+
+    const recommendations = findKNN(likedProductVectors, productVectors, k, allProducts);
+
+
+    return recommendations;
+}
+
 
 const Page = () => {
 
@@ -43,6 +58,7 @@ const Page = () => {
 
     const [products, setProducts] = useState([]);
     const [userDB, setUserDB] = useState(null); // Changed to null to indicate loading state
+    const [likedProducts, setLikedProducts] = useState([]);
 
     const likeProduct = async (productId) => {
         const userEmail = user.primaryEmailAddress.emailAddress;
@@ -60,7 +76,8 @@ const Page = () => {
             try {
                 const response = await axios.get(`https://express-testing-api.vercel.app/api/filtered-products/${orgs.toLowerCase()}/${category.toLowerCase()}`);
                 setProducts(response.data);
-                console.log(response.data);
+                console.log("Products: ", response.data);
+                console.log("Length: ", response.data.length);
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
@@ -71,11 +88,23 @@ const Page = () => {
                 try {
                     const response = await axios.get(`https://express-testing-api.vercel.app/api/users/${user.primaryEmailAddress.emailAddress}`);
                     setUserDB(response.data);
-                    console.log(response.data);
+                    console.log("user : ", response.data);
                 } catch (error) {
                     console.error("Error fetching user data:", error);
                 }
             }
+
+            const getLikedProducts = async () => {
+                try {
+                    const response = await axios.get(`https://express-testing-api.vercel.app/api/product-liked/${user.primaryEmailAddress.emailAddress}`);
+                    setLikedProducts(response.data.Products);
+                    console.log("products liked : ", response.data.Products);
+                } catch (error) {
+                    console.error("Error fetching user data:", error);   
+                }
+            }
+
+            getLikedProducts();
             getUserById();
         }
 
@@ -101,8 +130,23 @@ const Page = () => {
     ]
 
     if (!isLoaded || userDB === null || !user) {
-        return <div>Loading...</div>; // Return loading state if data is not yet loaded
+        // return <div>Loading...</div>; // Return loading state if data is not yet loaded
+        return (
+            <div className="flex flex-col items-center justify-center h-[600px] w-full">
+                <Loader />
+            </div>
+        )
     }
+
+
+    const recommendedProducts = orgs.toLowerCase() == 'all' && category.toLowerCase() == 'all' ? 
+    (
+        likedProducts.length < 1 ? products : RecommendationAlgorithm(likedProducts, products, 50)
+    ) : products;
+    
+    console.log("recommended products :", recommendedProducts);
+    console.log(likedProducts.length)
+    
 
     return (
         <div className='flex flex-col w-full lg:h-auto sm:h-auto'>
@@ -175,19 +219,21 @@ const Page = () => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-4 lg:w-[70%] min-h-[1300px] sm:w-full lg:items-start lg:justify-start sm:items-center sm:justify-center">
-                        <h1 className='text-lg lg:ml-6 font-bold uppercase sm:ml-0'>accessories</h1>
+                        <h1 className='text-lg lg:ml-6 font-bold uppercase sm:ml-0'>{decodeURI(category)}</h1>
                         <div className='flex flex-row items-center justify-center flex-wrap gap-1 w-full h-auto '>
-                            {products.map((product, index) => {
+                            {recommendedProducts.map((product, index) => {
                                 const isAlreadyLiked = userDB[0].product_liked.includes(product._id);
 
-                                return (
-                                    <ProductCard 
-                                        productDetails={product} 
-                                        likeOnClick={likeProduct}
-                                        isAlreadyLiked={isAlreadyLiked}
-                                        key={index} 
-                                    />
-                                )
+                                if(!isAlreadyLiked){
+                                    return (
+                                        <ProductCard 
+                                            productDetails={product} 
+                                            likeOnClick={likeProduct}
+                                            // isAlreadyLiked={isAlreadyLiked}
+                                            key={index} 
+                                        />
+                                    )
+                                }
                             })}
                         </div>
                         <div className='flex items-center justify-center lg:w-full sm:w-[80%]'>

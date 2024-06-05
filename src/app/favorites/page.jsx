@@ -1,9 +1,37 @@
+'use client'
+
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import { useAuth, useUser } from "@clerk/nextjs";
+
+
+// COMPONENTS
 import Link from "next/link"
 import ProductCard from "@/components/Card/ProductCard"
 import { HeartIcon } from '@heroicons/react/24/solid'
 
 const Page = ({}) => {
 
+    const [likedProducts, setLikedProducts] = useState([]);
+    const { user } = useUser();
+    const { isLoaded } = useAuth();
+
+    useEffect(() => {
+        if (user) {
+
+            const getLikedProducts = async () => {
+                try {
+                    const response = await axios.get(`https://express-testing-api.vercel.app/api/product-liked/${user.primaryEmailAddress.emailAddress}`);
+                    setLikedProducts(response.data.Products);
+                    console.log("products liked : ", response.data.Products);
+                } catch (error) {
+                    console.error("Error fetching user data:", error);   
+                }
+            }
+
+            getLikedProducts();
+        }
+    }, [user]); // Removed products from dependency array
 
 
     return (
@@ -25,15 +53,22 @@ const Page = ({}) => {
                     <div
                         className='flex flex-row flex-wrap justify-center items-center lg:w-[90%] lg:gap-4 sm:gap-1 sm:items-center sm:justify-center sm:w-full ml-5'
                     >
-                        {mockData.map((products, index) => (
-                            <ProductCard 
-                                productDetails={products} 
-                                key={index} 
-                            />
-                        ))}
+                        {                       
+                            isLoaded && (
+                                likedProducts.map((products, index) => {
+                                        return (
+                                            <ProductCard 
+                                                productDetails={products} 
+                                                isAlreadyLiked={true}
+                                                key={index} 
+                                            />
+                                        )
+                                })
+                            )
+                        }
                     </div>
                 </div>
-                <div
+                {/* <div
                     className="flex flex-col w-full h-auto bg-white"
                 >   
                     <div
@@ -46,354 +81,10 @@ const Page = ({}) => {
                     >
                         
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
 }
 
 export default Page
-
-
-const mockData = [
-    {
-        "_id": "66593ddc5bea81d3fc22dcc6",
-        "name": "Bulgary Necklace",
-        "price": 2000,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 4,
-        "chosen_variant": "Small",
-        "__v": 0
-    },
-    {
-        "_id": "66594ae35bea81d3fc22dcc8",
-        "name": "Diamond Solitaire Necklace",
-        "price": 1000,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 2,
-        "chosen_variant": "Medium",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-    {
-        "_id": "66594af05bea81d3fc22dcca",
-        "name": "Pearl Strand Necklace",
-        "price": 500,
-        "organization_owner": "unicef",
-        "description": "Accessory Necklace for fashion",
-        "image": "https://res-console.cloudinary.com/difziuyxq/thumbnails/v1/image/upload/v1717119639/aW1hZ2VzX2hlbmdxZQ==/drilldown",
-        "catergory": "Necklace",
-        "variation": [
-            "Small",
-            "Medium",
-            "Large"
-        ],
-        "quantity": 1,
-        "chosen_variant": "Large",
-        "__v": 0
-    },
-]
