@@ -6,13 +6,16 @@ import Image from 'next/image'
 import { ShoppingCartIcon,} from '@heroicons/react/24/outline'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
 import { HeartIcon } from '@heroicons/react/24/solid'
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     Button,
 } from '@mui/material'
+import { useRouter } from 'next/navigation'
 
 export default function ProductCard({productDetails, likeOnClick, isAlreadyLiked}) {
+
+    const router = useRouter();
 
     let displayName = productDetails?.name || '';
 
@@ -22,8 +25,30 @@ export default function ProductCard({productDetails, likeOnClick, isAlreadyLiked
             displayName = displayName.slice(0, index) + '<br>' + displayName.slice(index + 1);
         }
     }
+
+    const handleBuyNowClick = () => {
+        const serializedProductDetails = encodeURIComponent(JSON.stringify(productDetails));
+        router.push(`/checkout/${serializedProductDetails}`);
+    };
     
+    // const createCheckout = async () => {
+
+    //     try {
+    //         const registerUser = [{
+    //             name: user.id,
+    //             variation: user.fullName,
+    //             price: user.primaryEmailAddress.emailAddress, 
+    //             quantity: true
+    //         }];
+
+    //         const saveUser = await axios.post('https://deploy-express-vercel-ashy.vercel.app/api/create-checkout-session', registerUser);
+    //         console.log("Registered and saved user:", saveUser.data);
     
+    //     } catch (error) {
+    //         console.error("Checkout Session Error", error);
+    //     }
+    // }
+
     return (
         <React.Fragment>
             { productDetails && (
@@ -80,7 +105,10 @@ export default function ProductCard({productDetails, likeOnClick, isAlreadyLiked
                             <button className='flex lg:w-[44px] lg:h-[37px] rounded items-center justify-center bg-transparent border border-cyan text-cyan ease-in duration-150 sm:w-[44px] sm:h-[30px] hover:bg-cyan hover:text-white'>
                                 <ShoppingCartIcon className="size-4 text-blue-500" />
                             </button>
-                            <button className='lg:w-[170px] lg:h-[37px] bg-cyan rounded border border-cyan text-white ease-in duration-150 sm:w-[170px] sm:h-[30px] hover:bg-darkCyan hover:text-white'>
+                            <button 
+                                onClick={handleBuyNowClick}
+                                className='lg:w-[170px] lg:h-[37px] bg-cyan rounded border border-cyan text-white ease-in duration-150 sm:w-[170px] sm:h-[30px] hover:bg-darkCyan hover:text-white'
+                            >
                                 Buy now
                             </button>
                         </footer>
