@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
 
-export default function ProductCard({productDetails, likeOnClick, isAlreadyLiked}) {
+export default function ProductCard({productDetails, likeOnClick, addCartOnClick, isAlreadyLiked, isCheckout, addItemOnClick}) {
 
     const router = useRouter();
 
@@ -31,24 +31,6 @@ export default function ProductCard({productDetails, likeOnClick, isAlreadyLiked
         router.push(`/checkout/${serializedProductDetails}`);
     };
     
-    // const createCheckout = async () => {
-
-    //     try {
-    //         const registerUser = [{
-    //             name: user.id,
-    //             variation: user.fullName,
-    //             price: user.primaryEmailAddress.emailAddress, 
-    //             quantity: true
-    //         }];
-
-    //         const saveUser = await axios.post('https://deploy-express-vercel-ashy.vercel.app/api/create-checkout-session', registerUser);
-    //         console.log("Registered and saved user:", saveUser.data);
-    
-    //     } catch (error) {
-    //         console.error("Checkout Session Error", error);
-    //     }
-    // }
-
     return (
         <React.Fragment>
             { productDetails && (
@@ -102,15 +84,29 @@ export default function ProductCard({productDetails, likeOnClick, isAlreadyLiked
                             </div>
                         </div>
                         <footer className='flex flex-row gap-2'>
-                            <button className='flex lg:w-[44px] lg:h-[37px] rounded items-center justify-center bg-transparent border border-cyan text-cyan ease-in duration-150 sm:w-[44px] sm:h-[30px] hover:bg-cyan hover:text-white'>
+                            <button 
+                                onClick={()=> addCartOnClick(productDetails._id)}
+                                className='flex lg:w-[44px] lg:h-[37px] rounded items-center justify-center bg-transparent border border-cyan text-cyan ease-in duration-150 sm:w-[44px] sm:h-[30px] hover:bg-cyan hover:text-white'
+                            >
                                 <ShoppingCartIcon className="size-4 text-blue-500" />
                             </button>
-                            <button 
-                                onClick={handleBuyNowClick}
-                                className='lg:w-[170px] lg:h-[37px] bg-cyan rounded border border-cyan text-white ease-in duration-150 sm:w-[170px] sm:h-[30px] hover:bg-darkCyan hover:text-white'
-                            >
-                                Buy now
-                            </button>
+                            {
+                                isCheckout ? (
+                                    <button 
+                                        onClick={addItemOnClick}
+                                        className='lg:w-[170px] lg:h-[37px] bg-cyan rounded border border-cyan text-white ease-in duration-150 sm:w-[170px] sm:h-[30px] hover:bg-darkCyan hover:text-white'
+                                    >
+                                        Add Item
+                                    </button>
+                                ) : (
+                                    <button 
+                                        onClick={handleBuyNowClick}
+                                        className='lg:w-[170px] lg:h-[37px] bg-cyan rounded border border-cyan text-white ease-in duration-150 sm:w-[170px] sm:h-[30px] hover:bg-darkCyan hover:text-white'
+                                    >
+                                        Buy now
+                                    </button>
+                                )
+                            }
                         </footer>
                     </div>
                 </div>

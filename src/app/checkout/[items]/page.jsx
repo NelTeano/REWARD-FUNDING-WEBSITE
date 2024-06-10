@@ -25,9 +25,13 @@ import {
     TextField
 } from '@mui/material'
 
+import ProductCard from '@/components/Card/ProductCard'
+import Loader from '@/components/Loader/Loader'
+
+
 import { TrashIcon } from '@heroicons/react/24/solid'
-import { useEffect, useState, useMemo } from 'react'
-import { useParams, useRouter, redirect } from 'next/navigation';
+import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useParams, } from 'next/navigation';
 import axios from 'axios'
 
 
@@ -52,13 +56,16 @@ import axios from 'axios'
 // ]
 
 
+// RECOMMENDATION CAALCULATE FUNCTIONS
+import { RecommendationAlgorithm } from '../../../../public/assets/recommendKNN'
+
 const Page = ({}) => {
 
     const params = useParams();
-    const router = useRouter();
     const { items } = params;
 
     const [cartData, setCartData] = useState([]);
+    const [products, setProducts] = useState([]);
 
     useEffect(()=> {
         const decodedItems = [JSON.parse(decodeURIComponent(items))];
@@ -69,6 +76,22 @@ const Page = ({}) => {
         }));
         setCartData(itemsWithQuantity)
     },[items])
+
+    useEffect(() => {
+        const getProducts = async () => {
+            try {
+                const response = await axios.get(`https://express-testing-api.vercel.app/api/filtered-products/all/all`);
+                const recommendedProducts = RecommendationAlgorithm([JSON.parse(decodeURIComponent(items))], response.data, 20)
+                setProducts(recommendedProducts);
+                console.log("Products: ", response.data);
+                console.log("Length: ", response.data.length);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        }
+        getProducts()
+
+    },[items])
     
     const updateCartData = (data) => {
         setCartData((prevData) =>
@@ -78,12 +101,27 @@ const Page = ({}) => {
         );
     }
 
+    const addItem = useCallback((item) => {
+        setCartData((prevCartData) => [
+            ...prevCartData,
+            {
+                ...item,
+                quantity: 1,
+                chosen_variant: item.variation[0],
+            },
+        ]);
+
+        setProducts((prevProducts) => prevProducts.filter(product => product._id !== item._id));
+    }, []);
+
+
     const computedSubTotal = useMemo(() => {
         return cartData.reduce((sum, item) => sum + item.subtotal, 0);
     }, [cartData]);
 
 
     console.log("to be checkout details: ", cartData);
+    console.log("products", products)
 
 
     const createCheckout = async () => {
@@ -105,12 +143,16 @@ const Page = ({}) => {
         }
     }
 
+    // console.log(cartData)
+    // const recommendedProducts = RecommendationAlgorithm([JSON.parse(decodeURIComponent(items))], products, 20)
+
+    // console.log("recomended :", recommendedProducts)
     return (
         <>
             {cartData && (
                 <div className='flex flex-col w-full relative h-[5600px] sm:h-auto bg-black '>
                     <div
-                        className='flex flex-col relative items-center justify-center w-full h-auto min-h-[100vh] bg-lightGray mt-20 gap-8 lg:pb-0 sm:pb-[100px]'
+                        className='flex flex-col relative items-center justify-center w-full h-auto min-h-[85vh] bg-lightGray mt-20 gap-8'
                     >
                             <h1 className='text-lg text-black'>Checkout</h1>
                             <div
@@ -193,6 +235,44 @@ const Page = ({}) => {
                                     </div>
                                 </div>
                             </div>
+                    </div>
+                    <div
+                        className='flex flex-col w-full items-center justify-center bg-lightGray lg:pb-[100px] sm:pb-[100px] '
+                    >
+                        <div
+                            className='bg-lightGray'
+                        >
+                            <div
+                                className='lg:w-[1200px] h-[50px] sm:w-full sm:mt-10'
+                            >
+                                <h1 className='lg:text-lg sm:text-md sm:font-medium text-black'>Items you would like</h1> 
+                            </div>
+                        </div>
+                        <div
+                            className='flex flex-row flex-wrap lg:w-[1200px] h-auto bg-lightGray lg:gap-2 sm:w-auto sm:gap-1 items-center justify-center'
+                        >
+                            {
+                                products && (
+                                    products.map((product, index) => {
+                                    const item = product._id.includes(JSON.parse(decodeURIComponent(items))._id);
+                                    
+                                    if(!item){
+                                        return(
+                                            <ProductCard 
+                                                productDetails={product} 
+                                                addItemOnClick={() => addItem(product)}
+                                                isCheckout={true}
+                                                // likeOnClick={likeProduct}
+                                                // addCartOnClick={addToCart}
+                                                // isAlreadyLiked={isAlreadyLiked}
+                                                key={index} 
+                                            />
+                                        )
+                                    }
+                                })
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
             )}

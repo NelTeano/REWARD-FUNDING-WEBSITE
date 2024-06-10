@@ -32,18 +32,9 @@ import {
 import Link from 'next/link';
 import Loader from '@/components/Loader/Loader'
 
-// RECOMMENDATION CAALCULATE FUNCTIONS
-import { findKNN, productToVector } from './recommendKNN'
+// RECOMMENDATION CALCULATE FUNCTIONS
+import { RecommendationAlgorithm } from '../../../../../public/assets/recommendKNN'
 
-const RecommendationAlgorithm = (productsLiked, allProducts, k) => {
-    const productVectors = allProducts.map(product => productToVector(product));
-    const likedProductVectors = productsLiked.slice(0, 5).map(product => productToVector(product)); // Consider up to 5 liked products
-
-    const recommendations = findKNN(likedProductVectors, productVectors, k, allProducts);
-
-
-    return recommendations;
-}
 
 
 const Page = () => {
@@ -68,6 +59,17 @@ const Page = () => {
             console.log("Liked The Product", response.data);
         } catch (error) {
             console.error("Error occurred:", error);
+        }
+    }
+
+    const addToCart = async (productId) => {
+        const userEmail = user.primaryEmailAddress.emailAddress;
+
+        try {
+            const response = await axios.put(`https://express-testing-api.vercel.app/api/add-product-cart/${userEmail}/${productId}`)
+            console.log("Add To Cart The Product", response.data);
+        } catch (error) {
+            console.error("Add To Cart Error occurred :", error);
         }
     }
 
@@ -145,7 +147,7 @@ const Page = () => {
     ) : products;
     
     console.log("recommended products :", recommendedProducts);
-    console.log(likedProducts.length)
+    console.log("length of your liked product: ", likedProducts.length)
     
 
     return (
@@ -229,6 +231,7 @@ const Page = () => {
                                         <ProductCard 
                                             productDetails={product} 
                                             likeOnClick={likeProduct}
+                                            addCartOnClick={addToCart}
                                             // isAlreadyLiked={isAlreadyLiked}
                                             key={index} 
                                         />

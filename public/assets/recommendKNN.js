@@ -32,5 +32,15 @@ function findKNN(likedVectors, productVectors, k, products) {
     return similarities.slice(0, k).map(sim => products[sim.idx]);
 }
 
+const RecommendationAlgorithm = (productsLiked, allProducts, k) => {    
+    const productVectors = allProducts.map(product => productToVector(product));
+    const likedProductVectors = productsLiked.slice(0, 5).map(product => productToVector(product)); // Consider up to 5 liked products
 
-export { findKNN, productToVector }
+    const recommendations = findKNN(likedProductVectors, productVectors, k, allProducts);
+
+
+    return recommendations;
+}
+
+
+export { findKNN, productToVector, RecommendationAlgorithm}
